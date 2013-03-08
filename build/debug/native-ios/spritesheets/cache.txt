@@ -1,1 +1,0 @@
-{:map {"resources/images/tri.png" {:group "resources-images", :marginTop 0, :y 2, :marginBottom 0, :x 2, :sheet "resources-images0.png", :marginRight 0, :sheetSize [256 256], :h 4, :marginLeft 0, :scale 1, :w 4}}, :hashes {("resources" "images") 323101015}}
