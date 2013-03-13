@@ -57,8 +57,9 @@ exports = Class(GC.Application, function () {
       color: "#f00"
     });
     this.on("InputSelect", function (event, point) {
+
       new PointView({
-        focus: point,
+        point: new Point(1, point.x, point.y),
         superview: this.view
       });
       
