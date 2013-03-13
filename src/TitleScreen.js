@@ -15,10 +15,10 @@ exports = Class(View, function (supr) {
 
     var startButton = new View({
       superview: this,
-      x: 58,
-      y: 313,
-      width: 200,
-      height: 100
+      x: 0,
+      y: 0,
+      width: 260,
+      height: 308
     });
   
     startButton.on('InputSelect', bind(this, function () {
