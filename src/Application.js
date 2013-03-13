@@ -20,6 +20,7 @@ import ui.ImageView as ImageView;
 //user
 import src.circlegenerator as circles;
 import src.CircleView as CircleView;
+import src.LineView as LineView;
 
 exports = Class(GC.Application, function () {
 
@@ -62,18 +63,9 @@ exports = Class(GC.Application, function () {
           var toy = y1 + dy / 2 - 2;
           var r = dx ? Math.atan( dy / dx) : -Math.PI / 2;
 
-          new ImageView({
-            superview: this.view,
-            x: tox,
-            y: toy,
-            r: r,
-            anchorX: length / 2,
-            anchorY: 2,
-            width: length,
-            height: 4,
-            image: "resources/images/tri.png"
-          });
-
+          new LineView({
+            superview: this.view
+            }, currentPoint1, currentPoint2);
 
           var dx = currentPoint1.style.x - currentPoint2.style.x;
           var dy = currentPoint1.style.y - currentPoint2.style.y;
