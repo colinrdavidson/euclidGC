@@ -25,6 +25,7 @@ import src.Circle as Circle;
 import src.CircleView as CircleView;
 import src.LineView as LineView;
 import src.PointView as PointView;
+import src.State as State;
 
 exports = Class(GC.Application, function () {
 	this.initUI = function () {
