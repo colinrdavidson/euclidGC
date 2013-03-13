@@ -21,6 +21,7 @@ import ui.ImageView as ImageView;
 import src.circlegenerator as circles;
 import src.CircleView as CircleView;
 import src.LineView as LineView;
+import src.PointView as PointView;
 
 exports = Class(GC.Application, function () {
 
@@ -49,30 +50,11 @@ exports = Class(GC.Application, function () {
 
           console.log("CurrentPoints! Point1: " + currentPoint1.style.x + "," + currentPoint1.style.y + " Point2: " + currentPoint2.style.x + "," + currentPoint2.style.y);
             
-          var x1 = currentPoint1.style.x;
-          var y1 = currentPoint1.style.y;
-          var x2 = currentPoint2.style.x;
-          var y2 = currentPoint2.style.y;
-
-          var dx = x2 - x1;
-          var dy = y2 - y1;
-
-          var length = Math.sqrt(dx * dx + dy * dy);
-
-          var tox = x1 + (dx - length) / 2;
-          var toy = y1 + dy / 2 - 2;
-          var r = dx ? Math.atan( dy / dx) : -Math.PI / 2;
-
           new LineView({
             superview: this.view,
             pt1: currentPoint1,
             pt2: currentPoint2
             });
-
-          var dx = currentPoint1.style.x - currentPoint2.style.x;
-          var dy = currentPoint1.style.y - currentPoint2.style.y;
-
-          var radius = Math.sqrt(dx * dx + dy * dy);
 
           new CircleView({
             superview: this.view,
@@ -86,16 +68,20 @@ exports = Class(GC.Application, function () {
      }
 
      if (add) {
-      new ClickBox({
+      new PointView({
         superview: this.view,
-        x: point.x,
-        y: point.y,
-        offsetX: -5,
-        offsetY: -5,
-        width: 10,
-        height: 10,
-        backgroundColor: "#0000FF"
+        focus: point,
       });
+//      new ClickBox({
+//        superview: this.view,
+//        x: point.x,
+//        y: point.y,
+//        offsetX: -5,
+//        offsetY: -5,
+//        width: 10,
+//        height: 10,
+//        backgroundColor: "#0000FF"
+//      });
      }
 
 
