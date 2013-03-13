@@ -17,6 +17,8 @@
 
 import ui.View as View;
 import ui.ImageView as ImageView;
+//user
+import src.circlegenerator as circles
 
 exports = Class(GC.Application, function () {
 
@@ -32,7 +34,6 @@ exports = Class(GC.Application, function () {
       var children = this.getSubviews();  
 
      add = true;
-
      for (var i = 0; i < children.length; i++) {
       if (children[i].style.x <= point.x + 5 && children[i].style.x >= point.x - 5
         && children[i].style.y <= point.y + 5 && children[i].style.y >= point.y - 5) {
@@ -126,114 +127,20 @@ var ClickBox = Class(View, function (supr) {
 var Circle = Class(View, function (supr) {
   this.init = function (opts, focus, locus) {
     supr(this, "init", [opts]);
-    
 
-
-    var IMG = "resources/images/tri.png";
     var dx = focus.style.x - locus.style.x;
     var dy = focus.style.y - locus.style.y;
 
     var radius = Math.sqrt(dx * dx + dy * dy); 
+    
+    var opts = {
+      superview: this,
+      color: "#0000FF",
+      radius: radius,
+    };
 
-    //add the views!
+    circles.generateCircle(opts);
 
-    var x;
-    var y = radius;
-    var l = radius * Math.acos(Math.PI / 4);
-    var y2 = y * y;
-    var r2 = y2;
-    var y2new = r2 + 3;
-    var ty = ( 2 * y) - 1;
-
-    for(x = 0; x <= l+4; x++) {
-      y2new -= (2 * x) - 1;
-
-      if ((y2 - y2new) >= ty) {
-        y2 -= ty;
-        y -= 1;
-        ty -= 2;
-      }
-    new ImageView({
-      superview: this,
-      x: x,
-      y: y,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: x,
-      y: -y,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: -x,
-      y: y,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: -x,
-      y: -y,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: y,
-      y: x,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: y,
-      y: -x,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: -y,
-      y: x,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-    new ImageView({
-      superview: this,
-      x: -y,
-      y: -x,
-      offsetX: radius,
-      offsetY: radius,
-      width: 2,
-      height: 2,
-      image: IMG
-    });
-  }
   };
 });
 
