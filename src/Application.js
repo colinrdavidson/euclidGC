@@ -19,6 +19,9 @@ import ui.View as View;
 import ui.ImageView as ImageView;
 //user
 import src.circlegenerator as circles;
+import src.Point as Point;
+import src.Line as Line;
+import src.Circle as Circle;
 import src.CircleView as CircleView;
 import src.LineView as LineView;
 import src.PointView as PointView;
