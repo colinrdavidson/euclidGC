@@ -1,4 +1,7 @@
+//user
 import src.util as util;
+import src.model.Line as Line;
+import src.model.Circle as Circle;
 
 exports = Class(function() {
 
@@ -6,6 +9,7 @@ exports = Class(function() {
     this.layer = layer;
     this.x = Math.round(x*10000000)/10000000;
     this.y = Math.round(y*10000000)/10000000;
+    this.type = "Point";
   }
  
   this.copy = function (layer) {
@@ -17,7 +21,7 @@ exports = Class(function() {
   }
   
   this.isSame = function (pt) {
-    if ((pt instanceof Point) && (this.x == pt.x && this.y == pt.y)){
+    if ((pt.type && pt.type === 'Point') && (this.x == pt.x && this.y == pt.y)){
       return true;
     }
     else{
@@ -62,7 +66,7 @@ exports = Class(function() {
   }
   
   this.distanceTo = function (object) {
-    if (object instanceof Point){
+    if (object.type && object.type === 'Point'){
       return this.distanceToPoint(object);
     }
     else if (object instanceof Line){
