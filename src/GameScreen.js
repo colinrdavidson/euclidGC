@@ -12,6 +12,7 @@ exports = Class(View, function(supr) {
   this.init = function(opts) {
     supr(this, "init", [opts]);
 
+
     var point1 = new Point(1, 100, 100);
     var point2 = new Point(1, 100, 200);
     var line = new Line(1, point1, point2);
@@ -31,19 +32,19 @@ exports = Class(View, function(supr) {
       if (things[i] instanceof Point) {
         new PointView({
           point: things[i],
-          superview: this.view
+          superview: this
         });
       }
       else if (things[i] instanceof Line) {
         new LineView({
           line: things[i],
-          superview: this.view
+          superview: this
         });
       }
       else if (things[i] instanceof Circle) {
         new CircleView({
           circle: things[i],
-          superview: this.view
+          superview: this
         });
       }
     }

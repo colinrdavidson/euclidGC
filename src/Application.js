@@ -46,8 +46,11 @@ exports = Class(GC.Application, function () {
       clip: true,
     });
 
-    rootView.push(new View({superview: this.view, backgroundColor: "#F00", width: 100, height: 100}));
     rootView.push(titlescreen);
+
+    titlescreen.on("titlescreen:start", function () {
+      rootView.push(gamescreen);
+    });
   };
  
  this.launchUI = function () {};
