@@ -1,7 +1,7 @@
 import ui.View as View;
 import ui.ImageView as ImageView;
 
-exports = Class(View, function (supr) {
+exports = Class(ImageView, function (supr) {
   this.init = function (opts) {
     newOpts = {
       x: 0,
