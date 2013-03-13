@@ -31,7 +31,7 @@ exports = Class(GC.Application, function () {
     this.style.backgroundColor = "#FFFFFF";
 
     var point1 = new Point(1, 100, 100);
-    var point2 = new Point(1, 100, 200);
+    var point2 = new Point(1, 200, 100);
 
     var line = new Line(1,point1, point2);
     var circle = new Circle(1, point1, point2);
@@ -47,11 +47,13 @@ exports = Class(GC.Application, function () {
 
     new LineView({
       line: line,
-      superview: this.view
+      superview: this.view,
+      color: "#f00"
     });
     new CircleView({
       circle: circle,
-      superview: this.view
+      superview: this.view,
+      color: "#f00"
     });
     this.on("InputSelect", function (event, point) {
       new PointView({

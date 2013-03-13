@@ -24,14 +24,16 @@ exports = Class(View, function (supr) {
     var toy = y1 + dy / 2 ;
     var r = dx ? Math.atan(dy / dx): -Math.PI / 2;
 
+    var height = 1;
+
     var genOpts = {
       x: tox,
       y: toy,
       r: r,
-      anchorX: length / 2,
-      anchorY: 2,
       width: length,
-      height: 1,
+      height: height,
+      anchorX: length / 2,
+      anchorY: height / 2,
       backgroundColor: color
     };
 
