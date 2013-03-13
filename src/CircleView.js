@@ -15,12 +15,12 @@ exports = Class(View, function (supr) {
       color = "#000";
     }
 
-    var opts = {
+    var genOpts = {
       superview: this,
       color: color,
       radius: radius
     };
 
-    circlegenerator.generateCircle(opts);
+    circlegenerator.generateCircle(genOpts);
   }
 });
