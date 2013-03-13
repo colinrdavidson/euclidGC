@@ -15,8 +15,10 @@
  * along with the Game Closure SDK.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import device;
 import ui.View as View;
 import ui.ImageView as ImageView;
+import ui.StackView as StackView;
 //user
 import src.model.Point as Point;
 import src.model.Line as Line;
@@ -25,62 +27,28 @@ import src.model.State as State;
 import src.view.CircleView as CircleView;
 import src.view.LineView as LineView;
 import src.view.PointView as PointView;
+import src.GameScreen as GameScreen;
+import src.TitleScreen as TitleScreen;
 
 exports = Class(GC.Application, function () {
 	this.initUI = function () {
-    this.style.backgroundColor = "#FFFFFF";
+    var titlescreen = new TitleScreen();
+    var gamescreen = new GameScreen();
 
-    var point1 = new Point(1, 100, 100);
-    var point2 = new Point(1, 200, 100);
+    this.view.style.backgroundColor = "#FFF";
 
-    var line = new Line(1,point1, point2);
-    var circle = new Circle(1, point1, point2);
-
-    var stateObjects = {
-      points: [point1, point2],
-      lines: [line],
-      circles: [circle]
-    };
-
-    var state = new State(stateObjects);
-
-    var shapes = state.allObjects();
-
-    for (var i = 0; i < shapes.length; i++) {
-      if (shapes[i] instanceof Point) {
-        new PointView({
-          point: shapes[i],
-          superview: this.view
-        });
-      }
-      else if (shapes[i] instanceof Line) {
-        new LineView({
-         line: shapes[i],
-         superview: this.view
-        });
-
-      }
-      else if (shapes[i] instanceof Circle) {
-        new CircleView({
-          circle: shapes[i],
-          superview: this.view
-        });
-
-      }
-    }
-
-    this.on("InputSelect", function (event, point) {
-      var newPoint = new Point(1, point.x, point.y);
-
-      state.add(newPoint);
-
-      new PointView({
-        point: newPoint,
-        superview: this.view
-      });
-      
+    var rootView = new StackView({
+      superview: this,
+      x: device.width / 2 - 160,
+      y: device.height / 2 - 240,
+      width: 320,
+      height: 480,
+      clip: true,
     });
- };
+
+    rootView.push(new View({superview: this.view, backgroundColor: "#F00", width: 100, height: 100}));
+    rootView.push(titlescreen);
+  };
  
  this.launchUI = function () {};
 });
