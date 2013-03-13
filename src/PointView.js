@@ -1,13 +1,11 @@
 import ui.View as View;
 import ui.ImageView as ImageView;
 import ui.resource.Image as Image;
-//user
-import src.circlegenerator as circlegenerator;
 
 exports = Class(ImageView, function (supr) {
   this.init = function (opts) {
 
-    var focus = opts.focus;
+    var point = opts.point;
     var radius = opts.radius;
     var color = opts.color;
     var image = opts.image;
@@ -28,8 +26,8 @@ exports = Class(ImageView, function (supr) {
 
     //focus isn't a view here, this needs to be standardized
     var newOpts = {
-      x: focus.x - radius,
-      y: focus.y - radius,
+      x: point.x - radius,
+      y: point.y - radius,
       width: 2 * radius,
       height: 2 * radius,
       image: image
