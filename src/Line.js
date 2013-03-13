@@ -1,6 +1,6 @@
 import src.Point as Point;
 
-exports = function (layer, pt1, pt2){
+exports = Class(function (layer, pt1, pt2){
   this.layer = layer;
   this.pt1 = pt1;
   this.pt2 = pt2;
