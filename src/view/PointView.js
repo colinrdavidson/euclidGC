@@ -42,9 +42,10 @@ exports = Class(ImageView, function (supr) {
     };
 
 
-    this.on("InputSelect", function (event, point) {
+    this.on("InputSelect", function (event) {
       var image = new Image({url: "resources/images/circle-blue.png"});
       this.setImage(image);
+      this.emit('PointView:select', this);
       event.cancel();
     });
   }

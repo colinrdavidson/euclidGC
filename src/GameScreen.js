@@ -12,6 +12,8 @@ exports = Class(View, function(supr) {
   this.init = function(opts) {
     supr(this, "init", [opts]);
 
+    this._currentSelected1;
+    this._currentSelected2;
 
     var point1 = new Point(1, 100, 100);
     var point2 = new Point(1, 100, 200);
@@ -30,10 +32,13 @@ exports = Class(View, function(supr) {
    
     for (var i = 0; i < things.length; i++) {
       if (things[i] instanceof Point) {
-        new PointView({
-          point: things[i],
+        var point = things[i];
+        var pointView = new PointView({
+          point: point,
           superview: this
         });
+
+        pointView.on('PointView:select', function () { pointSelect(point); });
       }
       else if (things[i] instanceof Line) {
         new LineView({
@@ -48,5 +53,10 @@ exports = Class(View, function(supr) {
         });
       }
     }
-  }
+
+  };
+
+  var pointSelect = function (point) {
+    console.log(point.toString());
+  };
 });
