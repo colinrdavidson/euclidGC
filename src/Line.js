@@ -1,9 +1,12 @@
 import src.Point as Point;
+import src.util as util;
 
-exports = Class(function (layer, pt1, pt2){
-  this.layer = layer;
-  this.pt1 = pt1;
-  this.pt2 = pt2;
+exports = Class(function (){
+  this.init = function (layer, pt1, pt2) {
+    this.layer = layer;
+    this.pt1 = pt1;
+    this.pt2 = pt2;
+  }
 
   this.slope = function() {
     return (this.pt1.y - this.pt2.y) / (this.pt1.x - this.pt2.x);
@@ -41,7 +44,7 @@ exports = Class(function (layer, pt1, pt2){
       var locX = shape.loc.x;
       var locY = shape.loc.y;
   
-      var r = pointPointDistance(focX, focY, locX, locY);
+      var r = util.pointPointDistance(focX, focY, locX, locY);
   
       //(dP2x, dP2y) is vector from P1 to P2
       var dP2x = x2 - x1;
@@ -52,7 +55,7 @@ exports = Class(function (layer, pt1, pt2){
       var dCy = focY - y1;
   
       //a is the distance from point 1 to C
-      var a = pointPointDistance(x1, y1, focX, locX);
+      var a = util.pointPointDistance(x1, y1, focX, locX);
   
       //P3 is C projected onto the line
       //projScale is the scalar for the projection
@@ -66,13 +69,13 @@ exports = Class(function (layer, pt1, pt2){
       y3 = y1 + dP3y;
   
       //b is the distance from C to P3
-      var b = pointPointDistance(focX, focY, x3, y3);
+      var b = util.pointPointDistance(focX, focY, x3, y3);
   
       //d is the dsiatnce from P1 to P3
-      var d = pointPointDistance(x1, y1, x3, y3);
+      var d = util.pointPointDistance(x1, y1, x3, y3);
   
       if (d == 0){ //point1 of line is focus of circle
-        var offset = r/pointPointDistance(x1, y1, x2, y2);
+        var offset = r / util.pointPointDistance(x1, y1, x2, y2);
         var newX1 = x1 - dP2x*(offset);
         var newY1 = y1 - dP2y*(offset);
         var newX2 = x1 + dP2x*(offset);

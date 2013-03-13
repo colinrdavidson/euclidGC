@@ -1,3 +1,4 @@
+import src.util as util;
 exports = Class(function () {
 
   this.init = function (layer, foc, loc){
@@ -29,10 +30,10 @@ exports = Class(function () {
     if (shape instanceof Circle){
       var x0 = this.foc.x;
       var y0 = this.foc.y;
-      var r0 = pointPointDistance(this.foc.x, this.foc.y, this.loc.x, this.loc.y);
+      var r0 = util.pointPointDistance(this.foc.x, this.foc.y, this.loc.x, this.loc.y);
       var x1 = shape.foc.x; 
       var y1 = shape.foc.y;
-      var r1 = pointPointDistance(shape.foc.x, shape.foc.y, shape.loc.x, shape.loc.y);
+      var r1 = util.pointPointDistance(shape.foc.x, shape.foc.y, shape.loc.x, shape.loc.y);
       var a, dx, dy, d, h, rx, ry;
       var x2, y2;
   

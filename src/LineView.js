@@ -2,19 +2,19 @@ import ui.View as View;
 
 exports = Class(View, function (supr) {
   this.init = function (opts) {
-
-    var pt1 = opts.pt1;
-    var pt2 = opts.pt2;
+   
+    var pt1 = opts.line.pt1;
+    var pt2 = opts.line.pt2;
     var color = opts.color;
 
     if (!color) {
       var color = "#000";
     }
 
-    var x1 = pt1.style.x;
-    var y1 = pt1.style.y;
-    var x2 = pt2.style.x;
-    var y2 = pt2.style.y;
+    var x1 = pt1.x;
+    var y1 = pt1.y;
+    var x2 = pt2.x;
+    var y2 = pt2.y;
 
     var dx = x2 - x1;
     var dy = y2 - y1;

@@ -5,17 +5,17 @@ import src.circlegenerator as circlegenerator;
 exports = Class(View, function (supr) {
   this.init = function (opts) {
 
-    var focus = opts.focus;
-    var locus = opts.locus;
+    var focus = opts.circle.foc;
+    var locus = opts.circle.loc;
     var color = opts.color;
 
-    var dx = focus.style.x - locus.style.x;
-    var dy = focus.style.y - locus.style.y;
+    var dx = focus.x - locus.x;
+    var dy = focus.y - locus.y;
     var radius = Math.sqrt(dx * dx + dy * dy);
     
     var newOpts = {
-      x: focus.style.x - radius,
-      y: focus.style.y - radius,
+      x: focus.x - radius,
+      y: focus.y - radius,
       width: 2 * radius,
       height: 2 * radius
     };

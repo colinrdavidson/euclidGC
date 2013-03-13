@@ -1,3 +1,5 @@
+import src.util as util;
+
 exports = Class(function() {
 
   this.init = function(layer, x, y){
@@ -38,7 +40,7 @@ exports = Class(function() {
   }
   
   this.distanceToPoint = function (point) {
-    return pointPointDistance(this.x, this.y, point.x, point.y);
+    return util.pointPointDistance(this.x, this.y, point.x, point.y);
   }
   
   this.distanceToLine = function (line) {
@@ -53,7 +55,7 @@ exports = Class(function() {
   }
   
   this.distanceToCircle = function (circle) {
-    var d = pointPointDistance(this.x, this.y, circle.foc.x, circle.foc.y);
+    var d = util.pointPointDistance(this.x, this.y, circle.foc.x, circle.foc.y);
     var r = circle.radius;
   
     return Math.abs(d - r);

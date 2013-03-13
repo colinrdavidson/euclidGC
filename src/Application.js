@@ -30,11 +30,35 @@ exports = Class(GC.Application, function () {
 	this.initUI = function () {
     this.style.backgroundColor = "#FFFFFF";
 
+    var point1 = new Point(1, 100, 100);
+    var point2 = new Point(1, 100, 200);
+
+    var line = new Line(1,point1, point2);
+    var circle = new Circle(1, point1, point2);
+
+    new PointView({
+      point: point1,
+      superview: this.view
+    });
+    new PointView({
+      point: point2,
+      superview: this.view
+    });
+
+    new LineView({
+      line: line,
+      superview: this.view
+    });
+    new CircleView({
+      circle: circle,
+      superview: this.view
+    });
     this.on("InputSelect", function (event, point) {
       new PointView({
         focus: point,
         superview: this.view
       });
+      
     });
 	};
 	
