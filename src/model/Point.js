@@ -7,7 +7,7 @@ exports = Class(function() {
     this.x = Math.round(x*10000000)/10000000;
     this.y = Math.round(y*10000000)/10000000;
   }
-  
+ 
   this.copy = function (layer) {
     if (!layer){
       return new Point(this.layer, this.x, this.y);

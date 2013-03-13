@@ -1,18 +1,17 @@
+//user
+import src.model.Point as Point;
+import src.model.Line as Line;
+import src.model.Circle as Circle;
+import src.util as util;
+
 exports = Class(function () {
   
   this.init = function (obj) {
-    if (obj.points){
-      this.points = [];
-    }
-    if (obj.lines){
-      this.lines = [];
-    }
-    if (obj.circles){
-      this.circles = [];
-    }
-    if (obj.potentialPoints){
-      this.potentialPoints = [];
-    }
+
+    this.points = obj.points ? obj.points : [];
+    this.lines = obj.lines ? obj.lines : [];
+    this.circles = obj.circles ? obj.circles : [];
+    this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
   }
   
   this.allPoints = function () {

@@ -18,14 +18,13 @@
 import ui.View as View;
 import ui.ImageView as ImageView;
 //user
-import src.circlegenerator as circles;
-import src.Point as Point;
-import src.Line as Line;
-import src.Circle as Circle;
-import src.CircleView as CircleView;
-import src.LineView as LineView;
-import src.PointView as PointView;
-import src.State as State;
+import src.model.Point as Point;
+import src.model.Line as Line;
+import src.model.Circle as Circle;
+import src.model.State as State;
+import src.view.CircleView as CircleView;
+import src.view.LineView as LineView;
+import src.view.PointView as PointView;
 
 exports = Class(GC.Application, function () {
 	this.initUI = function () {
@@ -37,34 +36,51 @@ exports = Class(GC.Application, function () {
     var line = new Line(1,point1, point2);
     var circle = new Circle(1, point1, point2);
 
-    new PointView({
-      point: point1,
-      superview: this.view
-    });
-    new PointView({
-      point: point2,
-      superview: this.view
-    });
+    var stateObjects = {
+      points: [point1, point2],
+      lines: [line],
+      circles: [circle]
+    };
 
-    new LineView({
-      line: line,
-      superview: this.view,
-      color: "#f00"
-    });
-    new CircleView({
-      circle: circle,
-      superview: this.view,
-      color: "#f00"
-    });
+    var state = new State(stateObjects);
+
+    var shapes = state.allObjects();
+
+    for (var i = 0; i < shapes.length; i++) {
+      if (shapes[i] instanceof Point) {
+        new PointView({
+          point: shapes[i],
+          superview: this.view
+        });
+      }
+      else if (shapes[i] instanceof Line) {
+        new LineView({
+         line: shapes[i],
+         superview: this.view
+        });
+
+      }
+      else if (shapes[i] instanceof Circle) {
+        new CircleView({
+          circle: shapes[i],
+          superview: this.view
+        });
+
+      }
+    }
+
     this.on("InputSelect", function (event, point) {
+      var newPoint = new Point(1, point.x, point.y);
+
+      state.add(newPoint);
 
       new PointView({
-        point: new Point(1, point.x, point.y),
+        point: newPoint,
         superview: this.view
       });
       
     });
-	};
-	
-	this.launchUI = function () {};
+ };
+ 
+ this.launchUI = function () {};
 });

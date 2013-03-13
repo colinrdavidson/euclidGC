@@ -1,4 +1,4 @@
-import src.Point as Point;
+import src.model.Point as Point;
 import src.util as util;
 
 exports = Class(function (){

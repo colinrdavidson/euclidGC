@@ -1,4 +1,7 @@
+//user
+import src.model.Point;
 import src.util as util;
+
 exports = Class(function () {
 
   this.init = function (layer, foc, loc){
