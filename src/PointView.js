@@ -1,13 +1,20 @@
 import ui.View as View;
+import ui.ImageView as ImageView;
+import ui.resource.Image as Image;
 //user
 import src.circlegenerator as circlegenerator;
 
-exports = Class(View, function (supr) {
+exports = Class(ImageView, function (supr) {
   this.init = function (opts) {
 
     var focus = opts.focus;
     var radius = opts.radius;
     var color = opts.color;
+    var image = opts.image;
+
+    if (!image) {
+      image = "resources/images/circle-black.png";
+    }
 
     if (!color) {
       color = "#000";
@@ -17,12 +24,15 @@ exports = Class(View, function (supr) {
       radius = 5;
     }
 
+
+
     //focus isn't a view here, this needs to be standardized
     var newOpts = {
       x: focus.x - radius,
       y: focus.y - radius,
       width: 2 * radius,
-      height: 2 * radius 
+      height: 2 * radius,
+      image: image
     };
 
     opts = merge(opts, newOpts);
@@ -36,6 +46,11 @@ exports = Class(View, function (supr) {
       fill: true
     };
 
-    circlegenerator.generateCircle(genOpts);
+
+    this.on("InputSelect", function (event, point) {
+      var image = new Image({url: "resources/images/circle-blue.png"});
+      this.setImage(image);
+      event.cancel();
+    });
   }
 });
