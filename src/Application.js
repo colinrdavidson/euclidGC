@@ -64,8 +64,10 @@ exports = Class(GC.Application, function () {
           var r = dx ? Math.atan( dy / dx) : -Math.PI / 2;
 
           new LineView({
-            superview: this.view
-            }, currentPoint1, currentPoint2);
+            superview: this.view,
+            pt1: currentPoint1,
+            pt2: currentPoint2
+            });
 
           var dx = currentPoint1.style.x - currentPoint2.style.x;
           var dy = currentPoint1.style.y - currentPoint2.style.y;

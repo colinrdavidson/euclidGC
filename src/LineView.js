@@ -1,8 +1,11 @@
 import ui.View as View;
 
 exports = Class(View, function (supr) {
-  this.init = function (opts, pt1, pt2, color) {
-    supr(this, "init", [opts]);
+  this.init = function (opts) {
+
+    var pt1 = opts.pt1;
+    var pt2 = opts.pt2;
+    var color = opts.color;
 
     if (!color) {
       var color = "#000";
@@ -21,13 +24,19 @@ exports = Class(View, function (supr) {
     var toy = y1 + dy / 2 ;
     var r = dx ? Math.atan(dy / dx): -Math.PI / 2;
 
-    this.style.x = tox;
-    this.style.y = toy;
-    this.style.r = r;
-    this.style.anchorX = length / 2;
-    this.style.anchorY = 2;
-    this.style.width = length;
-    this.style.height = 1;
-    this.style.backgroundColor = color;
+    var genOpts = {
+      x: tox,
+      y: toy,
+      r: r,
+      anchorX: length / 2,
+      anchorY: 2,
+      width: length,
+      height: 1,
+      backgroundColor: color
+    };
+
+    opts = merge (opts, genOpts);
+
+    supr(this, "init", [opts]);
   }
 });
