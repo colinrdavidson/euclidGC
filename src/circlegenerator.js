@@ -43,7 +43,7 @@ var strokeCircle = function (opts) {
 
   var l = radius * Math.cos(Math.PI / 4);
 
-  for(x = 0; x <= l; x++) {
+  for(x = 0; x <= l+1; x++) {
     y = Math.sqrt(radius * radius - x * x);
 
 
@@ -53,8 +53,8 @@ var strokeCircle = function (opts) {
       y: y,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -63,8 +63,8 @@ var strokeCircle = function (opts) {
       y: -y,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -73,8 +73,8 @@ var strokeCircle = function (opts) {
       y: y,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -83,8 +83,8 @@ var strokeCircle = function (opts) {
       y: -y,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -93,8 +93,8 @@ var strokeCircle = function (opts) {
       y: x,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -103,8 +103,8 @@ var strokeCircle = function (opts) {
       y: -x,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -113,8 +113,8 @@ var strokeCircle = function (opts) {
       y: x,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
     new View({
@@ -123,8 +123,8 @@ var strokeCircle = function (opts) {
       y: -x,
       offsetX: radius,
       offsetY: radius,
-      width: 2,
-      height: 2,
+      width: 1,
+      height: 1,
       backgroundColor: color
     });
   }
