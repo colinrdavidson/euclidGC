@@ -74,11 +74,9 @@ exports = Class(GC.Application, function () {
 
           new CircleView({
             superview: this.view,
-            x: currentPoint1.style.x - radius,
-            y: currentPoint1.style.y - radius,
-            width: 2 * radius,
-            height: 2 * radius
-          }, currentPoint1, currentPoint2);
+            focus: currentPoint1,
+            locus: currentPoint2
+          });
         add = false;
         break;
         }
