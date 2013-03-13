@@ -24,81 +24,16 @@ import src.LineView as LineView;
 import src.PointView as PointView;
 
 exports = Class(GC.Application, function () {
-
-  var currentPoint1;
-  var currentPoint2;
-
 	this.initUI = function () {
     this.style.backgroundColor = "#FFFFFF";
 
     this.on("InputSelect", function (event, point) {
-      console.log("Point: " + point.x + "," + point.y);
-      
-      var children = this.getSubviews();  
-
-     add = true;
-     for (var i = 0; i < children.length; i++) {
-      if (children[i].style.x <= point.x + 5 && children[i].style.x >= point.x - 5
-        && children[i].style.y <= point.y + 5 && children[i].style.y >= point.y - 5) {
-
-        if (!currentPoint1) {
-          currentPoint1 = children[i];
-        }
-        else {
-          currentPoint2 = currentPoint1;
-          currentPoint1 = children[i];
-
-          console.log("CurrentPoints! Point1: " + currentPoint1.style.x + "," + currentPoint1.style.y + " Point2: " + currentPoint2.style.x + "," + currentPoint2.style.y);
-            
-          new LineView({
-            superview: this.view,
-            pt1: currentPoint1,
-            pt2: currentPoint2
-            });
-
-          new CircleView({
-            superview: this.view,
-            focus: currentPoint1,
-            locus: currentPoint2
-          });
-        add = false;
-        break;
-        }
-      }
-     }
-
-     if (add) {
       new PointView({
-        superview: this.view,
         focus: point,
+        superview: this.view
       });
-//      new ClickBox({
-//        superview: this.view,
-//        x: point.x,
-//        y: point.y,
-//        offsetX: -5,
-//        offsetY: -5,
-//        width: 10,
-//        height: 10,
-//        backgroundColor: "#0000FF"
-//      });
-     }
-
-
     });
 	};
 	
 	this.launchUI = function () {};
-});
-
-var ClickBox = Class(View, function (supr) {
-  this.init = function (opts) {
-    supr(this, "init", [opts]);
-    
-    this.on("InputSelect", function (event, point) {
-      var backgroundColor = (this.style.backgroundColor === "#FF0000") ? "#0000FF" : "#FF0000";
-      this.updateOpts({backgroundColor: backgroundColor});
-      console.log("Change color at Point: " + point.x + "," + point.y);
-    });
-  };
 });
