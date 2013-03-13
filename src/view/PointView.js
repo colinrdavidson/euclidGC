@@ -22,9 +22,6 @@ exports = Class(ImageView, function (supr) {
       radius = 5;
     }
 
-
-
-    //focus isn't a view here, this needs to be standardized
     var newOpts = {
       x: point.x - radius,
       y: point.y - radius,
