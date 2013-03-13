@@ -18,7 +18,8 @@
 import ui.View as View;
 import ui.ImageView as ImageView;
 //user
-import src.circlegenerator as circles
+import src.circlegenerator as circles;
+import src.CircleView as CircleView;
 
 exports = Class(GC.Application, function () {
 
@@ -79,7 +80,7 @@ exports = Class(GC.Application, function () {
 
           var radius = Math.sqrt(dx * dx + dy * dy);
 
-          new Circle({
+          new CircleView({
             superview: this.view,
             x: currentPoint1.style.x - radius,
             y: currentPoint1.style.y - radius,
@@ -123,24 +124,3 @@ var ClickBox = Class(View, function (supr) {
     });
   };
 });
-
-var Circle = Class(View, function (supr) {
-  this.init = function (opts, focus, locus) {
-    supr(this, "init", [opts]);
-
-    var dx = focus.style.x - locus.style.x;
-    var dy = focus.style.y - locus.style.y;
-
-    var radius = Math.sqrt(dx * dx + dy * dy); 
-    
-    var opts = {
-      superview: this,
-      color: "#0000FF",
-      radius: radius,
-    };
-
-    circles.generateCircle(opts);
-
-  };
-});
-
