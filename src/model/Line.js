@@ -6,6 +6,7 @@ exports = Class(function (){
     this.layer = layer;
     this.pt1 = pt1;
     this.pt2 = pt2;
+    this.type = "Line";
   }
 
   this.slope = function() {

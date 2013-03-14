@@ -12,6 +12,7 @@ exports = Class(function () {
     this.foc = foc;
     this.loc = loc;
     this.radius = foc.distanceToPoint(loc);
+    this.type = "Circle";
   }
   
   this.isSame = function (Cir) {
