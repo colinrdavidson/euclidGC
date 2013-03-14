@@ -16,11 +16,9 @@ exports = Class(View, function(supr) {
 
     var point1 = new Point(1, 100, 100);
     var point2 = new Point(1, 100, 200);
-    var circle = new Circle(1, point1, point2);
 
     var stateObjects = {
       points: [point2, point1],
-      circles: [circle]
     };
 
     this._state = new State(stateObjects);
@@ -28,29 +26,36 @@ exports = Class(View, function(supr) {
     var things = this._state.allObjects();
    
     for (var i = 0; i < things.length; i++) {
-      if (things[i] instanceof Point) {
-        var point = things[i];
+      this.addView(things[i]);
+    }
+  };
+
+  this.addView = function (shape) {
+    switch (shape.type) {
+      case "Point":
         var pointView = new PointView({
           point: point,
           superview: this
         });
-
         pointView.on('PointView:select', bind(this, this.pointSelect));
-      }
-      else if (things[i] instanceof Line) {
-        new LineView({
+        break;
+
+      case "Line":
+        var lineView = new LineView({
           line: things[i],
           superview: this
         });
-      }
-      else if (things[i] instanceof Circle) {
-        new CircleView({
+        lineView.on('LineView:select', bind(this, this.lineSelect));
+        break;
+
+      case "Circle":
+        var circleView = new CircleView({
           circle: things[i],
           superview: this
         });
-      }
+        circleView.on('CircleView:select', bind(this, this.circleSelect));
+        break;
     }
-
   };
 
   this.pointSelect = function (pointView) {
