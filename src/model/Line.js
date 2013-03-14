@@ -1,6 +1,5 @@
 //user
 import src.model.Point as Point;
-import src.model.Circle as Circle;
 import src.util as util;
 
 exports = Class(function () {

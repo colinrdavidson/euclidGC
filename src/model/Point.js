@@ -1,6 +1,4 @@
 //user
-import src.model.Line as Line;
-import src.model.Circle as Circle;
 import src.util as util;
 
 exports = Class(function () {
