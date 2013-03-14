@@ -54,14 +54,20 @@ exports = Class(GC.Application, function () {
     titlescreen.on("titlescreen:start", function () {
       rootView.push(gamescreen);
 
-      var point4 = new Point(1, 150, 150);
-      var point3 = new Point(1, 100, 250);
-      var line1 = new Line(1, point3, point4);
-      var circle1 = new Circle(1, point3, point4);
+      var point1 = new Point(1, 150, 150);
+      var point2 = new Point(1, 100, 250);
+      var point3 = new Point(1, 400, 250);
+      var point4 = new Point(1, 10, 150);
+      var line1 = new Line(1, point1, point2);
+      var line2 = new Line(1, point3, point4);
+      var circle1 = new Circle(1, point1, point2);
 
       stateObjects = new State();
-      stateObjects.add([point4, point3, line1, circle1]);
+      stateObjects.add([point1, point2, point3, point4, line1, line2, circle1]);
+      goalState = new State();
+      goalState.add(new Point(1, 1, 1));
 
+      game.goalState = goalState;
       game.add(stateObjects);
       game.draw();
     });
