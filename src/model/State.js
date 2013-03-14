@@ -24,7 +24,7 @@ exports = Class(function () {
   }
 
   this.pointsLinesCircles = function () {
-    return this.points.concat(this.linesCircles);
+    return this.points.concat(this.linesCircles());
   }
   
   this.all = function () {
