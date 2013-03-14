@@ -98,7 +98,7 @@ exports = Class(function () {
       }
     }
     else if (object.type === "State"){
-      this.add(object.pointsLinesCircles);
+      this.add(object.pointsLinesCircles());
     }
   
     if (game.complete()){
