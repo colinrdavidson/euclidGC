@@ -10,6 +10,8 @@ exports = Class(ImageView, function (supr) {
     var color = opts.color;
     var image = opts.image;
 
+    this._point = point;
+
     if (!image) {
       image = "resources/images/circle-black.png";
     }
