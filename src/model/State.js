@@ -7,27 +7,32 @@ import src.util as util;
 exports = Class(function () {
   
   this.init = function (obj) {
-
+    obj = obj || {};
     this.points = obj.points ? obj.points : [];
     this.lines = obj.lines ? obj.lines : [];
     this.circles = obj.circles ? obj.circles : [];
     this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
+    this.type = "State";
   }
   
-  this.allPoints = function () {
+  this.pointsPotentialPoints = function () {
     return this.points.concat(this.potentialPoints);
   }
   
-  this.allShapes = function () {
+  this.linesCircles = function () {
     return this.lines.concat(this.circles);
   }
+
+  this.pointsLinesCircles = function () {
+    return this.points.concat(this.linesCircles);
+  }
   
-  this.allObjects = function () {
-    return this.allPoints().concat(this.allShapes());
+  this.all = function () {
+    return this.pointsPotentialPoints().concat(this.linesCircles());
   }
   
   this.addPoint = function (point) {
-    if (point instanceof Point){
+    if (point.type === "Point"){
       if (!point.isInArray(this.points)){
         this.points.push(point);
         console.log(point.toString());
@@ -39,10 +44,10 @@ exports = Class(function () {
   }
   
   this.addLine = function (line) {
-    if (line instanceof Line){
+    if (line.type === "Line"){
       if (!line.isInArray(this.lines)){
-        for (var i = 0; i < this.allShapes().length; i++){
-          var potentialPoints = line.intersectsWith(this.allShapes()[i]);
+        for (var i = 0; i < this.linesCircles().length; i++){
+          var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
   
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
@@ -61,10 +66,10 @@ exports = Class(function () {
   }
   
   this.addCircle = function (circle) {
-    if(circle instanceof Circle){
+    if(circle.type === "Circle"){
       if (!circle.isInArray(this.circles)){
-        for (var i = 0; i < this.allShapes().length; i++){
-          var potentialPoints = circle.intersectsWith(this.allShapes()[i]);
+        for (var i = 0; i < this.linesCircles().length; i++){
+          var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
   
           if (potentialPoints){
             for (var j = 0; j < potentialPoints.length; j++){
@@ -83,7 +88,7 @@ exports = Class(function () {
   }
   
   this.addPotentialPoint = function (point) {
-    if (point instanceof Point){
+    if (point.type === "Point"){
       if (!point.isInArray(this.potentialPoints)){
         this.potentialPoints.push(point);
       }
@@ -129,13 +134,13 @@ exports = Class(function () {
   }
   
   this.add = function (object) {
-    if (object instanceof Point){
+    if (object.type === "Point"){
       this.addPoint(object);
     }
-    else if (object instanceof Line){
+    else if (object.type === "Line"){
       this.addLine(object);
     }
-    else if (object instanceof Circle){
+    else if (object.type === "Circle"){
       this.addCircle(object);
     }
     else if (Object.prototype.toString.call(object) === '[object Array]'){
@@ -143,10 +148,8 @@ exports = Class(function () {
         this.add(object[i]);
       }
     }
-    else if (object instanceof State){
-      this.add(object.points);
-      this.add(object.lines);
-      this.add(object.circles);
+    else if (object.type === "State"){
+      this.add(object.pointsLinesCircles());
     }
     else if (object.points || object.lines || object.circles){
       this.addLevelState(object);
@@ -154,7 +157,7 @@ exports = Class(function () {
   }
   
   this.isContainedIn = function (state) {
-    if (state instanceof State){
+    if (state.type === "State"){
       for (var i = 0; i < this.points.length; i++){
         if (!this.points[i].isInArray(state.points)){
           return false;

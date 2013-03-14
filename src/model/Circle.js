@@ -1,5 +1,6 @@
 //user
-import src.model.Point;
+import src.model.Point as Point;
+import src.model.Line as Line;
 import src.util as util;
 
 exports = Class(function () {
@@ -16,7 +17,7 @@ exports = Class(function () {
   }
   
   this.isSame = function (Cir) {
-    if ((Cir instanceof Circle) && this.foc.isSame(Cir.foc) && this.radius == Cir.radius){
+    if ((Cir.type === "Circle") && this.foc.isSame(Cir.foc) && this.radius == Cir.radius){
       return true;
     }
     else{
@@ -31,7 +32,7 @@ exports = Class(function () {
   this.intersectsWith = function (shape) {
     var pointsOfIntersection = [];
   
-    if (shape instanceof Circle){
+    if (shape.type === "Circle"){
       var x0 = this.foc.x;
       var y0 = this.foc.y;
       var r0 = util.pointPointDistance(this.foc.x, this.foc.y, this.loc.x, this.loc.y);
@@ -103,7 +104,7 @@ exports = Class(function () {
       }
     }
   
-    else if (shape instanceof Line){
+    else if (shape.type === "Line"){
       return shape.intersectsWith(this);
     }
     else{

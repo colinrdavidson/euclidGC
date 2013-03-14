@@ -1,7 +1,10 @@
+//user
 import src.model.Point as Point;
+import src.model.Circle as Circle;
 import src.util as util;
 
-exports = Class(function (){
+exports = Class(function () {
+
   this.init = function (layer, pt1, pt2) {
     this.layer = layer;
     this.pt1 = pt1;
@@ -14,10 +17,10 @@ exports = Class(function (){
   }
 
   this.isSame = function(Ln) {
-    if ((Ln instanceof Line) && this.pt1.isSame(Ln.pt1) && this.pt2.isSame(Ln.pt2)){
+    if ((Ln.type === "Line") && this.pt1.isSame(Ln.pt1) && this.pt2.isSame(Ln.pt2)){
       return true;
     }
-    else if ((Ln instanceof Line) && this.pt1.isSame(Ln.pt2) && this.pt2.isSame(Ln.pt1)){
+    else if ((Ln.type === "Line") && this.pt1.isSame(Ln.pt2) && this.pt2.isSame(Ln.pt1)){
       return true;
     }
     else{
@@ -36,7 +39,7 @@ exports = Class(function (){
     var x2 = this.pt2.x;
     var y2 = this.pt2.y;
   
-    if (shape instanceof Circle){
+    if (shape.type === "Circle"){
       //P1 is the first line point
       //P2 is the second line point
       //C is the centre of the circle
@@ -72,7 +75,7 @@ exports = Class(function (){
       //b is the distance from C to P3
       var b = util.pointPointDistance(focX, focY, x3, y3);
   
-      //d is the dsiatnce from P1 to P3
+      //d is the distance from P1 to P3
       var d = util.pointPointDistance(x1, y1, x3, y3);
   
       if (d == 0){ //point1 of line is focus of circle
@@ -128,7 +131,7 @@ exports = Class(function (){
       }
     }
       
-    else if (shape instanceof Line){
+    else if (shape.type === "Line"){
       var x1 = this.pt1.x;
       var y1 = this.pt1.y;
       var x2 = this.pt2.x;

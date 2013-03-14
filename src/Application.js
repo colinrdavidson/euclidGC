@@ -27,6 +27,7 @@ import src.model.State as State;
 import src.view.CircleView as CircleView;
 import src.view.LineView as LineView;
 import src.view.PointView as PointView;
+import src.controller.GameController as GameController;
 import src.GameScreen as GameScreen;
 import src.TitleScreen as TitleScreen;
 
@@ -34,6 +35,8 @@ exports = Class(GC.Application, function () {
 	this.initUI = function () {
     var titlescreen = new TitleScreen();
     var gamescreen = new GameScreen();
+
+    GLOBAL.game = new GameController(gamescreen); 
 
     this.view.style.backgroundColor = "#FFF";
 
@@ -50,6 +53,17 @@ exports = Class(GC.Application, function () {
 
     titlescreen.on("titlescreen:start", function () {
       rootView.push(gamescreen);
+
+      var point4 = new Point(1, 150, 150);
+      var point3 = new Point(1, 100, 250);
+      var line1 = new Line(1, point3, point4);
+      var circle1 = new Circle(1, point3, point4);
+
+      stateObjects = new State();
+      stateObjects.add([point4, point3, line1, circle1]);
+
+      game.add(stateObjects);
+      game.draw();
     });
   };
  

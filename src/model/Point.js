@@ -1,14 +1,14 @@
 //user
-import src.util as util;
 import src.model.Line as Line;
 import src.model.Circle as Circle;
+import src.util as util;
 
-exports = Class(function() {
+exports = Class(function () {
 
-  this.init = function(layer, x, y){
+  this.init = function (layer, x, y) {
     this.layer = layer;
-    this.x = Math.round(x*10000000)/10000000;
-    this.y = Math.round(y*10000000)/10000000;
+    this.x = x;
+    this.y = y;
     this.type = "Point";
   }
  
@@ -16,8 +16,9 @@ exports = Class(function() {
     if (!layer){
       return new Point(this.layer, this.x, this.y);
     }
-    else
+    else{
       return new Point(layer, this.x, this.y);
+    }
   }
   
   this.isSame = function (pt) {
@@ -48,7 +49,7 @@ exports = Class(function() {
   }
   
   this.distanceToLine = function (line) {
-    if (line instanceof Line){
+    if (line.type === "Line"){
       if (this.projectedOnto(line)){
         return this.distanceToPoint(this.projectedOnto(line));
       }
@@ -66,13 +67,13 @@ exports = Class(function() {
   }
   
   this.distanceTo = function (object) {
-    if (object.type && object.type === 'Point'){
+    if (object.type === 'Point'){
       return this.distanceToPoint(object);
     }
-    else if (object instanceof Line){
+    else if (object.type === "Line"){
       return this.distanceToLine(object);
     }
-    else if (object instanceof Circle){
+    else if (object.type === "Circle"){
       return this.distanceToCircle(object);
     }
     else{
