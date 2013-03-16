@@ -1,0 +1,7 @@
+TODO
+-would like to add potential points as hidden views, can easily do this
+by inheriting from PointView and just adding a hover over event
+-I think we need a good way of finding corresponding views and models,
+can do this using x ys i think
+-if we have this, then we can easily add potential points and slurpies
+and stuff i think... 
