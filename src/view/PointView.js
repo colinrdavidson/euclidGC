@@ -7,17 +7,12 @@ exports = Class(ImageView, function (supr) {
 
     var point = opts.point;
     var radius = opts.radius;
-    var color = opts.color;
     var image = opts.image;
 
     this._point = point;
 
     if (!image) {
       image = "resources/images/circle-black.png";
-    }
-
-    if (!color) {
-      color = "#000";
     }
 
     if (!radius) {
@@ -35,14 +30,6 @@ exports = Class(ImageView, function (supr) {
     opts = merge(opts, newOpts);
 
     supr(this, "init", [opts]);
-
-    var genOpts = {
-      superview: this,
-      color: color,
-      radius: radius,
-      fill: true
-    };
-
 
     this.on("InputSelect", function (event) {
       var image = new Image({url: "resources/images/circle-blue.png"});
