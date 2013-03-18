@@ -1,11 +1,5 @@
 TODO
--would like to add potential points as hidden views, can easily do this
-by inheriting from PointView and just adding a hover over event
--I think we need a good way of finding corresponding views and models,
-can do this using x ys i think
--if we have this, then we can easily add potential points and slurpies
-and stuff i think... 
--make a bunch more images for point colours, also a transparent image,
-it feels bad but I don't have another way to get the imageviews for
-potential points to work off the top of my head, as i think that setting
-the visibility of a view off turns off events as well.
+
+-adding potential points to the view, we need a way of the model telling
+the controller that potential points have been added so it can add them
+
