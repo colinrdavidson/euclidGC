@@ -69,6 +69,7 @@ exports = Class(GC.Application, function () {
 
       game.goalState = goalState;
       game.add(stateObjects);
+      game.add(stateObjects.potentialPoints);
       game.draw();
     });
   };
