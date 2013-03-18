@@ -3,11 +3,13 @@ import src.util as util;
 
 exports = Class(function () {
 
-  this.init = function (layer, x, y) {
+  this.init = function (layer, x, y, potential) {
     this.layer = layer;
     this.x = x;
     this.y = y;
     this.type = "Point";
+    
+    this.potential = potential ? true : false;
   }
  
   this.copy = function (layer) {

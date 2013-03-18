@@ -5,6 +5,7 @@ import src.model.Line as Line;
 import src.model.Circle as Circle;
 import src.model.State as State;
 import src.view.PointView as PointView;
+import src.view.PotentialPointView as PotentialPointView;
 import src.view.LineView as LineView;
 import src.view.CircleView as CircleView;
 import src.controller.GameController as GameController;
@@ -31,11 +32,19 @@ exports = Class(View, function(supr) {
           break;
            
         case "Point":
-          var pointView = new PointView({
-            point: object,
-            superview: this
-          });
-          pointView.on('PointView:select', bind(this, this.pointSelect));
+          if (object.potential) {
+            var potentialPointView = new PotentialPointView({
+              point: object,
+              superview: this
+            });
+          }
+          else {
+            var pointView = new PointView({
+              point: object,
+              superview: this
+            });
+            pointView.on('PointView:select', bind(this, this.pointSelect));
+          }
           break;
 
         case "Line":

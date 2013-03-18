@@ -90,6 +90,7 @@ exports = Class(function () {
   this.addPotentialPoint = function (point) {
     if (point.type === "Point"){
       if (!point.isInArray(this.potentialPoints)){
+        point.potential = true;
         this.potentialPoints.push(point);
       }
     }
