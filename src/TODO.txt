@@ -5,3 +5,7 @@ by inheriting from PointView and just adding a hover over event
 can do this using x ys i think
 -if we have this, then we can easily add potential points and slurpies
 and stuff i think... 
+-make a bunch more images for point colours, also a transparent image,
+it feels bad but I don't have another way to get the imageviews for
+potential points to work off the top of my head, as i think that setting
+the visibility of a view off turns off events as well.
