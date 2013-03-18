@@ -17,7 +17,7 @@ exports = Class(ImageView, function (supr) {
 
     var startButton = new ButtonView({
       superview: this,
-      width: 200,
+      width: 300,
       height: 60,
       x: device.width / 2 - 100,
       y: 300,

@@ -42,10 +42,10 @@ exports = Class(GC.Application, function () {
 
     var rootView = new StackView({
       superview: this,
-      x: device.width / 2 - 160,
-      y: device.height / 2 - 240,
-      width: 320,
-      height: 480,
+      x: 0, 
+      y: 0,
+      width: device.width,
+      height: device.height,
       clip: true,
     });
 
@@ -70,7 +70,7 @@ exports = Class(GC.Application, function () {
       game.goalState = goalState;
       game.add(stateObjects);
       game.add(stateObjects.potentialPoints);
-      game.draw();
+//      game.draw();
     });
   };
  
