@@ -143,7 +143,7 @@ exports = Class(function () {
       this.add(object.all());
     }
     else if (object.points || object.lines || object.circles){
-      this.removeLevelState(object);
+      this.addLevelState(object);
     }
   
     if (game.complete()){

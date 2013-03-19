@@ -56,58 +56,52 @@ exports = Class(function () {
   
 //Add Methods
   this.addPoint = function (point) {
-    if (point.type === "Point"){
-      if (!point.isInArray(this.points)){
-        this.points.push(point);
-        console.log(point.toString());
-      }
+    if (!point.isInArray(this.points)){
+      this.points.push(point);
+      console.log("Add: ", point.toString());
     }
     else {
-      console.log("Point already in array.");
+      console.log("Failed to add: ", point.toString());
     }
   }
   
   this.addLine = function (line) {
-    if (line.type === "Line"){
-      if (!line.isInArray(this.lines)){
-        for (var i = 0; i < this.linesCircles().length; i++){
-          var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
+    if (!line.isInArray(this.lines)){
+      for (var i = 0; i < this.linesCircles().length; i++){
+        var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
   
-          if (potentialPoints){
-            for (var j = 0; j < potentialPoints.length; j++){
-              this.addPotentialPoint(potentialPoints[j]);  
-            }
+        if (potentialPoints){
+          for (var j = 0; j < potentialPoints.length; j++){
+            this.addPotentialPoint(potentialPoints[j]);  
           }
         }
+      }
   
-        this.lines.push(line);
-        console.log(line.toString());
-      }
-      else {
-        console.log("Line already in array");
-      }
+      this.lines.push(line);
+      console.log("Add: ", line.toString());
+    }
+    else {
+      console.log("Failed to add: ", line.toString());
     }
   }
   
   this.addCircle = function (circle) {
-    if(circle.type === "Circle"){
-      if (!circle.isInArray(this.circles)){
-        for (var i = 0; i < this.linesCircles().length; i++){
-          var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
+    if (!circle.isInArray(this.circles)){
+      for (var i = 0; i < this.linesCircles().length; i++){
+        var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
   
-          if (potentialPoints){
-            for (var j = 0; j < potentialPoints.length; j++){
-              this.addPotentialPoint(potentialPoints[j]);  
-            }
+        if (potentialPoints){
+          for (var j = 0; j < potentialPoints.length; j++){
+            this.addPotentialPoint(potentialPoints[j]);  
           }
         }
-  
-        this.circles.push(circle);
-        console.log(circle.toString());
-      } 
-      else{
-        console.log("Circle already in array.");
       }
+  
+      this.circles.push(circle);
+      console.log("Add :", circle.toString());
+    } 
+    else{
+      console.log("Failed to add: ", circle.toString());
     }
   }
   
@@ -116,10 +110,11 @@ exports = Class(function () {
       if (!point.isInArray(this.potentialPoints)){
         point.potential = true;
         this.potentialPoints.push(point);
+        console.log("Add: Potential: ", point.toString());
       }
     }
     else {
-      console.log("not a point.");
+      console.log("Failed to add: ", point.toString());
     }
   }
   
@@ -177,33 +172,59 @@ exports = Class(function () {
   
 //Remove Methods
   this.removePoint = function (point) {
-    for (var i = 0; i < this.points.length; i++){
-      if (point.isSame(this.points[i])){
-        this.points.splice(i, 1);
+    if (point.isInArray(this.points)){
+      for (var i = 0; i < this.points.length; i++){
+        if (point.isSame(this.points[i])){
+          this.points.splice(i, 1);
+          console.log("Remove: ", point.toString());
+        }
       }
+    }
+    else{
+      console.log("Failed to add: ", point.toString());
     }
   }
 
   this.removeLine = function (line) {
-    for (var i = 0; i < this.lines.length; i++){
-      if (line.isSame(this.lines[i])){
-        this.lines.splice(i, 1);
+    if (line.isInArray(this.lines)){
+      for (var i = 0; i < this.lines.length; i++){
+        if (line.isSame(this.lines[i])){
+          this.lines.splice(i, 1);
+          console.log("Remove: ", line.toString());
+        }
       }
+    }
+    else{
+      console.log("Failed to add: ", line.toString());
     }
   }
 
   this.removeCircle = function (circle) {
-    for (var i = 0; i < this.circles.length; i++){
-      if (circle.isSame(this.circles[i])){
-        this.circles.splice(i, 1);
+    if (circle.isInArray(this.circles)){
+      for (var i = 0; i < this.circles.length; i++){
+        if (circle.isSame(this.circles[i])){
+          this.circles.splice(i, 1);
+          console.log("Remove: ", circle.toString());
+        }
       }
+    }
+    else{
+      console.log("Failed to add: ", circle.toString());
+    }
   }
 
   this.removePotentialPoint = function (point) {
-    for (var i = 0; i < this.PotentialPoints.length; i++){
-      if (point.isSame(this.PotentialPoints[i])){
-        this.PotentialPoints.splice(i, 1);
+    if (point.isInArray(this.potentialPoints)){
+      for (var i = 0; i < this.PotentialPoints.length; i++){
+        if (point.isSame(this.PotentialPoints[i])){
+          this.PotentialPoints.splice(i, 1);
+          console.log("Remove: Potential:", point.toString());
+        }
       }
+    }
+    else{
+      console.log("Failed to remove: Potential: ", point.toString());
+    }
   }
 
   this.removeLevelState = function (levelState) {
