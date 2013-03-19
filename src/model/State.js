@@ -13,7 +13,6 @@ exports = Class(function () {
     this.circles = obj.circles ? obj.circles : [];
     this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
     this.type = "State";
-    this.history = [];
   }
 
   this.isContainedIn = function (state) {
