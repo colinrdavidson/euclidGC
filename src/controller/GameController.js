@@ -81,6 +81,35 @@ exports = Class(function () {
     this.state.addCircle(circle);
     this.draw(circle);
   }
+
+  this.addLevelState = function (levelState) {
+    var points = levelState.points;
+    var lines = levelState.lines;
+    var circles = levelState.circles;
+  
+    if (points){
+      for (var p in points){
+        var point = new Point(0, points[p].x, points[p].y);
+        this.addPoint(point); 
+      }
+    }
+  
+  
+    if (lines){
+      for (var l in lines){
+        var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
+        this.addLine(line);
+      }
+    }
+  
+  
+    if (circles){
+      for (var c in circles){
+        var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
+        this.addCircle(circle);
+      } 
+    }
+  }
   
   this.add = function (object) {
     if (object.type === "Point"){
@@ -99,6 +128,9 @@ exports = Class(function () {
     }
     else if (object.type === "State"){
       this.add(object.all());
+    }
+    else if (object.points || object.lines || object.circles){
+      this.removeLevelState(object);
     }
   
     if (game.complete()){
