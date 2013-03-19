@@ -82,10 +82,16 @@ exports = Class(function () {
     this.draw(circle);
   }
 
+  this.addPotentialPoint = function (point) {
+    this.state.addPotentialPoint(point);
+    this.draw(point);
+  }
+
   this.addLevelState = function (levelState) {
     var points = levelState.points;
     var lines = levelState.lines;
     var circles = levelState.circles;
+    var potentialPoints = levelState.potentialPoints;
   
     if (points){
       for (var p in points){
@@ -94,7 +100,6 @@ exports = Class(function () {
       }
     }
   
-  
     if (lines){
       for (var l in lines){
         var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
@@ -102,12 +107,18 @@ exports = Class(function () {
       }
     }
   
-  
     if (circles){
       for (var c in circles){
         var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
         this.addCircle(circle);
       } 
+    }
+
+    if (potentialPoints){
+      for (var p in potentialPoints){
+        var point = new Point(0, potentialPoints[p].x, potentialPoints[p].y);
+        this.addPotentialPoint(point); 
+      }
     }
   }
   
