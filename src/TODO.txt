@@ -1,5 +1,7 @@
 TODO
-
 -adding potential points to the view, we need a way of the model telling
 the controller that potential points have been added so it can add them
 
+-remove: the game controller needs to deal with drawing when removing
+
+-history: should write an undo using remove functions
