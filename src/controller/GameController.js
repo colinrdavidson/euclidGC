@@ -12,6 +12,7 @@ exports = Class(function () {
     this.state = new State();
     this.goalState = new State();
     this.levelName;
+    this.history = [];
   }
   
   this.loadLevel = function (levelName) {
@@ -125,6 +126,12 @@ exports = Class(function () {
   }
   
   this.add = function (object) {
+    this._add(object);
+    this.history.push(this.state.recentlyAdded);
+    this.state.recentlyAdded = [];
+  }
+
+  this._add = function (object) {
     if (object.type === "Point"){
       this.addPoint(object);
     }
@@ -136,19 +143,19 @@ exports = Class(function () {
     }
     else if (Object.prototype.toString.call(object) === '[object Array]'){
       for (var i = 0; i < object.length; i++){
-        this.add(object[i]);
+        this._add(object[i]);
       }
     }
     else if (object.type === "State"){
-      this.add(object.all());
+      this._add(object.all());
     }
     else if (object.points || object.lines || object.circles){
       this.addLevelState(object);
     }
   
-    if (game.complete()){
-      alert("You win, you always do!");
-    }
+    //if (game.complete()){
+    //  alert("You win, you always do!");
+    //}
   }
 
 

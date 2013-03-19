@@ -13,6 +13,7 @@ exports = Class(function () {
     this.circles = obj.circles ? obj.circles : [];
     this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
     this.type = "State";
+    this.recentlyAdded = [];
   }
 
   this.isContainedIn = function (state) {
@@ -57,6 +58,7 @@ exports = Class(function () {
   this.addPoint = function (point) {
     if (!point.isInArray(this.points)){
       this.points.push(point);
+      this.recentlyAdded.push(point);
       console.log("Add: ", point.toString());
     }
     else {
@@ -77,6 +79,7 @@ exports = Class(function () {
       }
   
       this.lines.push(line);
+      this.recentlyAdded.push(line);
       console.log("Add: ", line.toString());
     }
     else {
@@ -97,6 +100,7 @@ exports = Class(function () {
       }
   
       this.circles.push(circle);
+      this.recentlyAdded.push(circle);
       console.log("Add :", circle.toString());
     } 
     else{
@@ -109,6 +113,7 @@ exports = Class(function () {
       if (!point.isInArray(this.potentialPoints)){
         point.potential = true;
         this.potentialPoints.push(point);
+        this.recentlyAdded.push(point);
         console.log("Add: Potential: ", point.toString());
       }
     }
@@ -162,7 +167,7 @@ exports = Class(function () {
       }
     }
     else if (object.type === "State"){
-      this.add(object.pointsLinesCircles());
+      this.add(object.all());
     }
     else if (object.points || object.lines || object.circles){
       this.addLevelState(object);
@@ -269,7 +274,7 @@ exports = Class(function () {
       }
     }
     else if (object.type === "State"){
-      this.remove(object.pointsLinesCircles());
+      this.remove(object.all());
     }
     else if (object.points || object.lines || object.circles){
       this.removeLevelState(object);
