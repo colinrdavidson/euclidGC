@@ -13,8 +13,31 @@ exports = Class(function () {
     this.circles = obj.circles ? obj.circles : [];
     this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
     this.type = "State";
+    this.history = [];
   }
-  
+
+  this.isContainedIn = function (state) {
+    if (state.type === "State"){
+      for (var i = 0; i < this.points.length; i++){
+        if (!this.points[i].isInArray(state.points)){
+          return false;
+        }
+      }
+      for (var i = 0; i < this.lines.length; i++){
+        if (!this.lines[i].isInArray(state.lines)){
+          return false;
+        }
+      }
+      for (var i = 0; i < this.circles.length; i++){
+        if (!this.circles[i].isInArray(state.circles)){
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
   this.pointsPotentialPoints = function () {
     return this.points.concat(this.potentialPoints);
   }
@@ -31,6 +54,7 @@ exports = Class(function () {
     return this.pointsPotentialPoints().concat(this.linesCircles());
   }
   
+//Add Methods
   this.addPoint = function (point) {
     if (point.type === "Point"){
       if (!point.isInArray(this.points)){
@@ -101,35 +125,29 @@ exports = Class(function () {
   
   this.addLevelState = function (levelState) {
     var points = levelState.points;
+    var lines = levelState.lines;
+    var circles = levelState.circles;
   
     if (points){
-  
       for (var p in points){
         var point = new Point(0, points[p].x, points[p].y);
-        //So we can refer to this point later
-        points[p] = point;
         this.addPoint(point); 
       }
     }
   
-    var lines = levelState.lines;
   
     if (lines){
       for (var l in lines){
         var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
-        
         this.addLine(line);
       }
     }
   
-    var circles = levelState.circles;
   
     if (circles){
       for (var c in circles){
         var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
-  
         this.addCircle(circle);
-  
       } 
     }
   }
@@ -157,25 +175,84 @@ exports = Class(function () {
     }
   }
   
-  this.isContainedIn = function (state) {
-    if (state.type === "State"){
-      for (var i = 0; i < this.points.length; i++){
-        if (!this.points[i].isInArray(state.points)){
-          return false;
-        }
+//Remove Methods
+  this.removePoint = function (point) {
+    for (var i = 0; i < this.points.length; i++){
+      if (point.isSame(this.points[i])){
+        this.points.splice(i, 1);
       }
-      for (var i = 0; i < this.lines.length; i++){
-        if (!this.lines[i].isInArray(state.lines)){
-          return false;
-        }
-      }
-      for (var i = 0; i < this.circles.length; i++){
-        if (!this.circles[i].isInArray(state.circles)){
-          return false;
-        }
-      }
-      return true;
     }
-    return false;
+  }
+
+  this.removeLine = function (line) {
+    for (var i = 0; i < this.lines.length; i++){
+      if (line.isSame(this.lines[i])){
+        this.lines.splice(i, 1);
+      }
+    }
+  }
+
+  this.removeCircle = function (circle) {
+    for (var i = 0; i < this.circles.length; i++){
+      if (circle.isSame(this.circles[i])){
+        this.circles.splice(i, 1);
+      }
+  }
+
+  this.removePotentialPoint = function (point) {
+    for (var i = 0; i < this.PotentialPoints.length; i++){
+      if (point.isSame(this.PotentialPoints[i])){
+        this.PotentialPoints.splice(i, 1);
+      }
+  }
+
+  this.removeLevelState = function (levelState) {
+    var points = levelState.points;
+    var lines = levelState.lines;
+    var circles = levelState.circles;
+  
+    if (points){
+      for (var p in points){
+        var point = new Point(0, points[p].x, points[p].y);
+        this.removePoint(point); 
+      }
+    }
+  
+    if (lines){
+      for (var l in lines){
+        var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
+        this.removeLine(line);
+      }
+    }
+  
+    if (circles){
+      for (var c in circles){
+        var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
+        this.removeCircle(circle);
+      } 
+    }
+  }
+
+  this.remove = function (object) {
+    if (object.type === "Point"){
+      this.removePoint(object);
+    }
+    else if (object.type === "Line"){
+      this.removeLine(object);
+    }
+    else if (object.type === "Circle"){
+      this.removeCircle(object);
+    }
+    else if (Object.prototype.toString.call(object) === '[object Array]'){
+      for (var i = 0; i < object.length; i++){
+        this.remove(object[i]);
+      }
+    }
+    else if (object.type === "State"){
+      this.remove(object.pointsLinesCircles());
+    }
+    else if (object.points || object.lines || object.circles){
+      this.removeLevelState(object);
+    }
   }
 });
