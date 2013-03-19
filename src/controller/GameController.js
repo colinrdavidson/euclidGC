@@ -38,35 +38,37 @@ exports = Class(function () {
     this.state.add(level.state);
     this.goalState.add(level.goalState);
   }
-  
-  this.points = function () {
-    return this.state.points;
-  }
-  
-  this.lines = function () {
-    return this.state.lines;
-  }
-  
-  this.circles = function () {
-    return this.state.circles;
+
+  this.complete = function () {
+    if (this.goalState.isContainedIn(this.state)){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
   
   this.potentialPoints = function () {
-    return this.state.potentialPoints;
+    return this.state.potentialPoints();
+  }
+
+  this.pointsPotentialPoints = function () {
+    return this.points.concat(this.potentialPoints);
   }
   
-  this.allPoints = function () {
-    return this.state.allPoints();
+  this.linesCircles = function () {
+    return this.lines.concat(this.circles);
+  }
+
+  this.pointsLinesCircles = function () {
+    return this.points.concat(this.linesCircles());
   }
   
-  this.allShapes = function () {
-    return this.state.allShapes();
+  this.all = function () {
+    return this.pointsPotentialPoints().concat(this.linesCircles());
   }
-  
-  this.allObjects = function () {
-    return this.state.allObjects();
-  }
-  
+   
+//Add Methods
   this.addPoint = function (point) {
     this.state.addPoint(point);
     this.draw(point);
@@ -148,7 +150,54 @@ exports = Class(function () {
       alert("You win, you always do!");
     }
   }
-  
+
+
+//Remove Methods
+  this.removePoint = function (point) {
+    this.state.removePoint(point);
+  }
+
+  this.removeLine = function (line) {
+    this.state.removeLine(line);
+  }
+
+  this.removeCircle = function (circle) {
+    this.state.removeCircle(circle);
+  }
+
+  this.removePotentialPoint = function (point) {
+    this.state.removePotentialPoint(point);
+  }
+
+  this.removeLevelState = function (levelState) {
+    this.state.removeLevelState(levelState);
+  }
+
+  this.remove = function (object) {
+    if (object.type === "Point"){
+      this.removePoint(object);
+    }
+    else if (object.type === "Line"){
+      this.removeLine(object);
+    }
+    else if (object.type === "Circle"){
+      this.removeCircle(object);
+    }
+    else if (Object.prototype.toString.call(object) === '[object Array]'){
+      for (var i = 0; i < object.length; i++){
+        this.remove(object[i]);
+      }
+    }
+    else if (object.type === "State"){
+      this.remove(object.all());
+    }
+    else if (object.points || object.lines || object.circles){
+      this.removeLevelState(object);
+    }
+  }
+
+
+//Drawing methods 
   this.draw = function (object, colour) {
     if (!object){
       this.drawer.draw(game.state, colour);
@@ -178,15 +227,6 @@ exports = Class(function () {
     }
     else{
       this.drawer.clearLayer(layer);
-    }
-  }
-  
-  this.complete = function () {
-    if (this.goalState.isContainedIn(this.state)){
-      return true;
-    }
-    else{
-      return false;
     }
   }
 });
