@@ -219,9 +219,9 @@ exports = Class(function () {
 
   this.removePotentialPoint = function (point) {
     if (point.isInArray(this.potentialPoints)){
-      for (var i = 0; i < this.PotentialPoints.length; i++){
-        if (point.isSame(this.PotentialPoints[i])){
-          this.PotentialPoints.splice(i, 1);
+      for (var i = 0; i < this.potentialPoints.length; i++){
+        if (point.isSame(this.potentialPoints[i])){
+          this.potentialPoints.splice(i, 1);
           console.log("Remove: Potential:", point.toString());
         }
       }
