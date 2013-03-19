@@ -72,22 +72,24 @@ exports = Class(function () {
 //Add Methods
   this.addPoint = function (point) {
     this.state.addPoint(point);
-    this.draw(point);
   }
   
   this.addLine = function (line) { 
     this.state.addLine(line);
-    this.draw(line);
   }
   
   this.addCircle = function (circle) {
     this.state.addCircle(circle);
-    this.draw(circle);
   }
 
   this.addPotentialPoint = function (point) {
     this.state.addPotentialPoint(point);
-    this.draw(point);
+  }
+
+  this.promotePotentialPoint = function (point) {
+    this.removePotentialPoint(point);
+    point.potential = false;
+    this.add(point);
   }
 
   this.addLevelState = function (levelState) {
@@ -128,6 +130,7 @@ exports = Class(function () {
   this.add = function (object) {
     this._add(object);
     this.history.push(this.state.recentlyAdded);
+    this.draw(this.state.recentlyAdded);
     this.state.recentlyAdded = [];
   }
 
