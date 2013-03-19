@@ -6,6 +6,8 @@ import ui.widget.ButtonView as ButtonView;
 exports = Class(ImageView, function (supr) {
   this.init = function (opts) {
     newOpts = {
+      width: device.width,
+      height: device.height,
       x: 0,
       y: 0,
       image: "resources/images/euclidimage.png"
@@ -17,10 +19,10 @@ exports = Class(ImageView, function (supr) {
 
     var startButton = new ButtonView({
       superview: this,
-      width: 300,
+      width: 200,
       height: 60,
       x: device.width / 2 - 100,
-      y: 300,
+      y: 3 * device.height / 4,
       images: {
         up: "resources/images/blue1.png",
         down: "resources/images/blue2.png",
