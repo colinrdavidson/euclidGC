@@ -20,5 +20,10 @@ exports = Class(PointView, function (supr) {
       var image = new Image({url: "resources/images/circle-blank.png"});
       this.setImage(image);
     }));
+
+    this.on("InputSelect", bind(this, function (event) {
+      this.emit('PotentialPointView:select', this);
+      event.cancel();
+    }));
   };
 });

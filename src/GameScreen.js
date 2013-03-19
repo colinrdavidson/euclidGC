@@ -80,7 +80,7 @@ exports = Class(View, function(supr) {
               point: object,
               superview: this
             });
-            potentialPointView.on('PointView:select', bind(this, this.potentialPointSelect));
+            potentialPointView.on('PotentialPointView:select', bind(this, this.potentialPointSelect));
           }
           else {
             var pointView = new PointView({
@@ -117,18 +117,14 @@ exports = Class(View, function(supr) {
   };
 
   this.potentialPointSelect = function (potentialPointView) {
-    var point = pointView._point;
+    var point = potentialPointView._point;
 
-    point.potential = false;
-
-    //need to redraw this
-    //first remove the oldView
+    game.promotePotentialPoint(point);
     potentialPointView.removeFromSuperview();
 
-    this.draw(point); 
+
 
     this.selectShape(point);
-
   };
 
   this.selectShape = function (shape) {
