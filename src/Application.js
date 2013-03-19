@@ -62,15 +62,9 @@ exports = Class(GC.Application, function () {
       var line2 = new Line(1, point3, point4);
       var circle1 = new Circle(1, point1, point2);
 
-      stateObjects = new State();
-      stateObjects.add([point1, point2, point3, point4, line1, line2, circle1]);
-      goalState = new State();
-      goalState.add(new Point(1, 1, 1));
-
-      game.goalState = goalState;
-      game.add(stateObjects);
-      game.add(stateObjects.potentialPoints);
-//      game.draw();
+      game.add([point1, point2, point3, point4]);
+      game.add([line1, line2]);
+      game.add([circle1]);
     });
   };
  
