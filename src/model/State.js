@@ -67,19 +67,21 @@ exports = Class(function () {
   }
   
   this.addLine = function (line) {
+    var toReturn = [];
     if (!line.isInArray(this.lines)){
       for (var i = 0; i < this.linesCircles().length; i++){
         var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
   
-        if (potentialPoints){
-          for (var j = 0; j < potentialPoints.length; j++){
-            this.addPotentialPoint(potentialPoints[j]);  
+        for (var j = 0; j < potentialPoints.length; j++) {
+          if (!potentialPoints[j].isInArray(toReturn)) {
+            toReturn.push(potentialPoints[j];
           }
         }
       }
   
       this.lines.push(line);
       this.recentlyAdded.push(line);
+      return toReturn;
       console.log("Add: ", line.toString());
     }
     else {
@@ -88,19 +90,21 @@ exports = Class(function () {
   }
   
   this.addCircle = function (circle) {
+    var toReturn = [];
     if (!circle.isInArray(this.circles)){
       for (var i = 0; i < this.linesCircles().length; i++){
         var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
   
-        if (potentialPoints){
-          for (var j = 0; j < potentialPoints.length; j++){
-            this.addPotentialPoint(potentialPoints[j]);  
+        for (var j = 0; j < potentialPoints.length; j++){
+          if (!potentialPoints[j].isInArray(toReturn)) {
+            toReturn.push(potentialPoints[j];
           }
         }
       }
   
       this.circles.push(circle);
       this.recentlyAdded.push(circle);
+      return toReturn;
       console.log("Add :", circle.toString());
     } 
     else{

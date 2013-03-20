@@ -75,15 +75,24 @@ exports = Class(function () {
   }
   
   this.addLine = function (line) { 
-    this.state.addLine(line);
+    var potentialPoints = this.state.addLine(line);
+    game.addPotentialPoint(potentialPoints);
   }
   
   this.addCircle = function (circle) {
-    this.state.addCircle(circle);
+    var potentialPoints = this.state.addCircle(circle);
+    game.addPotentialPoint(potentialPoints);
   }
 
   this.addPotentialPoint = function (point) {
-    this.state.addPotentialPoint(point);
+    if (Object.prototype.toString.call(point) === '[object Array]'){
+      for (var i = 0; i < point.length; i++){
+        this.addPotentialPoint(point[i]);
+      }
+    }
+    else if(point.type == "Point") {
+      this.state.addPotentialPoint(point);
+    }
   }
 
   this.promotePotentialPoint = function (point) {
