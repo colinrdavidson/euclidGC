@@ -74,7 +74,7 @@ exports = Class(function () {
   
         for (var j = 0; j < potentialPoints.length; j++) {
           if (!potentialPoints[j].isInArray(toReturn)) {
-            toReturn.push(potentialPoints[j];
+            toReturn.push(potentialPoints[j]);
           }
         }
       }
@@ -97,7 +97,7 @@ exports = Class(function () {
   
         for (var j = 0; j < potentialPoints.length; j++){
           if (!potentialPoints[j].isInArray(toReturn)) {
-            toReturn.push(potentialPoints[j];
+            toReturn.push(potentialPoints[j]);
           }
         }
       }
