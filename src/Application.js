@@ -19,7 +19,7 @@ import device;
 import ui.View as View;
 import ui.ImageView as ImageView;
 import ui.StackView as StackView;
-//user
+S
 import src.model.Point as Point;
 import src.model.Line as Line;
 import src.model.Circle as Circle;

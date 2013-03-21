@@ -1,4 +1,4 @@
-import device
+import device;
 import ui.View as View;
 import ui.widget.ButtonView as ButtonView;
 //user
@@ -11,7 +11,8 @@ import src.view.PotentialPointView as PotentialPointView;
 import src.view.LineView as LineView;
 import src.view.CircleView as CircleView;
 import src.controller.GameController as GameController;
-import src.Hash as Hash;
+import src.ModelViewHash as Hash;
+
 exports = Class(View, function(supr) {
   this.init = function(opts) {
     supr(this, "init", [opts]);

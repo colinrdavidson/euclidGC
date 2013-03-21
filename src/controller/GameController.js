@@ -4,6 +4,7 @@ import src.model.Point as Point;
 import src.model.Line as Line;
 import src.model.Circle as Circle;
 import src.model.State as State;
+import src.ModelViewHash as Hash;
 
 exports = Class(function () {
 
@@ -13,7 +14,7 @@ exports = Class(function () {
     this.goalState = new State();
     this.levelName;
     this.history = [];
-    this.hash = new hash();
+    this.hash = new Hash();
   }
   
   this.loadLevel = function (levelName) {
