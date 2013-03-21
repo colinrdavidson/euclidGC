@@ -81,12 +81,12 @@ exports = Class(function () {
   
       this.lines.push(line);
       this.recentlyAdded.push(line);
-      return toReturn;
       console.log("Add: ", line.toString());
     }
     else {
       console.log("Failed to add: ", line.toString());
     }
+    return toReturn;
   }
   
   this.addCircle = function (circle) {
@@ -104,12 +104,12 @@ exports = Class(function () {
   
       this.circles.push(circle);
       this.recentlyAdded.push(circle);
-      return toReturn;
       console.log("Add :", circle.toString());
     } 
     else{
       console.log("Failed to add: ", circle.toString());
     }
+    return toReturn;
   }
   
   this.addPotentialPoint = function (point) {
