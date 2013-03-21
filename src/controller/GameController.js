@@ -13,6 +13,7 @@ exports = Class(function () {
     this.goalState = new State();
     this.levelName;
     this.history = [];
+    this.hash = new hash();
   }
   
   this.loadLevel = function (levelName) {
