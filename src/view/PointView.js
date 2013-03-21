@@ -11,8 +11,10 @@ exports = Class(ImageView, function (supr) {
 
     this._point = point;
 
+    this._defaultImage = "resources/images/circle-black.png";
+
     if (!image) {
-      image = "resources/images/circle-black.png";
+      image = this._defaultImage;
     }
 
     if (!radius) {
@@ -31,11 +33,20 @@ exports = Class(ImageView, function (supr) {
 
     supr(this, "init", [opts]);
 
-    this.on("InputSelect", function (event) {
-      var image = new Image({url: "resources/images/circle-blue.png"});
-      this.setImage(image);
+    this.on("InputSelect", bind(this, function (event) {
+      this.select();
       this.emit('PointView:select', this);
       event.cancel();
-    });
-  }
+    }));
+  };
+
+  this.select = function () {
+    var image = new Image({url: "resources/images/circle-blue.png"});
+    this.setImage(image);
+  };
+
+  this.unselect = function () {
+    var image = new Image({url: this._defaultImage});
+    this.setImage(image);
+  };
 });

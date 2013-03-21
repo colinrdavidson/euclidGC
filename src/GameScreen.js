@@ -170,7 +170,10 @@ exports = Class(View, function(supr) {
 
   this.selectShape = function (shape) {
     if (this._selectedShapes.length >= 2) {
-     this._selectedShapes.shift();
+     var unselected = this._selectedShapes.shift();
+    
+      var unselectedView = game.hash.byModel[unselected];
+      unselectedView.unselect();
     }
 
     this._selectedShapes.push(shape);
