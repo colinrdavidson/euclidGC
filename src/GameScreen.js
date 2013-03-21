@@ -12,7 +12,6 @@ import src.view.LineView as LineView;
 import src.view.CircleView as CircleView;
 import src.controller.GameController as GameController;
 import src.Hash as Hash;
-
 exports = Class(View, function(supr) {
   this.init = function(opts) {
     supr(this, "init", [opts]);
@@ -160,8 +159,6 @@ exports = Class(View, function(supr) {
 
     game.promotePotentialPoint(point);
     potentialPointView.removeFromSuperview();
-
-
 
     this.selectShape(point);
   };
