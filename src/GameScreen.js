@@ -165,6 +165,8 @@ exports = Class(View, function(supr) {
     game.promotePotentialPoint(point);
     potentialPointView.removeFromSuperview();
 
+    var newPointView = game.hash.byModel[point];
+    newPointView.select();
     this.selectShape(point);
   };
 
