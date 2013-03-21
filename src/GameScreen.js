@@ -169,6 +169,15 @@ exports = Class(View, function(supr) {
   };
 
   this.selectShape = function (shape) {
+    //TODO there should and is a better way of doing this, try and get jquery
+    //or underscore js rockin
+
+    for(var i = 0; i <= this._selectedShapes.length; i++) {
+      if (this._selectedShapes[i] == shape) {
+        return;
+      }
+    }
+
     if (this._selectedShapes.length >= 2) {
      var unselected = this._selectedShapes.shift();
     
