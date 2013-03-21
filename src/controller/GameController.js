@@ -97,11 +97,6 @@ exports = Class(function () {
     }
   }
 
-  this.promotePotentialPoint = function (point) {
-    this.removePotentialPoint(point);
-    point.potential = false;
-    this.add(point);
-  }
 
   this.addLevelState = function (levelState) {
     var points = levelState.points;
@@ -137,7 +132,7 @@ exports = Class(function () {
       }
     }
   }
-  
+
   this.add = function (object) {
     this._add(object);
     this.history.push(this.state.recentlyAdded);
@@ -172,6 +167,12 @@ exports = Class(function () {
     //}
   }
 
+//Add/Remove Methods
+  this.promotePotentialPoint = function (point) {
+    this.removePotentialPoint(point);
+    point.potential = false;
+    this.add(point);
+  }
 
 //Remove Methods
   this.removePoint = function (point) {

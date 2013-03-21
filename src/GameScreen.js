@@ -120,6 +120,7 @@ exports = Class(View, function(supr) {
               superview: this
             });
             potentialPointView.on('PotentialPointView:select', bind(this, this.potentialPointSelect));
+            game.hash.add({model: object, view: potentialPointView});
           }
           else {
             var pointView = new PointView({
@@ -127,6 +128,7 @@ exports = Class(View, function(supr) {
               superview: this
             });
             pointView.on('PointView:select', bind(this, this.pointSelect));
+            game.hash.add({model: object, view: pointView});
           }
           break;
 
@@ -136,6 +138,7 @@ exports = Class(View, function(supr) {
             superview: this
           });
           lineView.on('LineView:select', bind(this, this.lineSelect));
+          game.hash.add({model: object, view: lineView});
           break;
 
         case "Circle":
@@ -144,6 +147,7 @@ exports = Class(View, function(supr) {
             superview: this
           });
           circleView.on('CircleView:select', bind(this, this.circleSelect));
+          game.hash.add({model: object, view: circleView});
           break;
       }
     }
