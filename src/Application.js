@@ -30,9 +30,10 @@ import src.view.PointView as PointView;
 import src.controller.GameController as GameController;
 import src.GameScreen as GameScreen;
 import src.TitleScreen as TitleScreen;
+import src.levels.Levels as Levels;
 
 exports = Class(GC.Application, function () {
-	this.initUI = function () {
+  this.initUI = function () {
     var titlescreen = new TitleScreen();
     var gamescreen = new GameScreen();
 
@@ -54,6 +55,7 @@ exports = Class(GC.Application, function () {
     titlescreen.on("titlescreen:start", function () {
       rootView.push(gamescreen);
 
+      /*
       var point1 = new Point(1, 150, 150);
       var point2 = new Point(1, 100, 250);
       var point3 = new Point(1, 400, 250);
@@ -65,6 +67,9 @@ exports = Class(GC.Application, function () {
       game.add([point1, point2, point3, point4]);
       game.add([line1, line2]);
       game.add([circle1]);
+      */
+
+      game.loadLevel('intro0');
     });
   };
  

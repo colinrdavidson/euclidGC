@@ -5,6 +5,7 @@ import src.model.Line as Line;
 import src.model.Circle as Circle;
 import src.model.State as State;
 import src.ModelViewHash as Hash;
+import src.levels.Levels as Levels;
 
 exports = Class(function () {
 
@@ -19,7 +20,6 @@ exports = Class(function () {
   
   this.loadLevel = function (levelName) {
     this.levelName = levelName;
-    this.clearLayer();
     //find levelName in levelArray
     var level = Levels[levelName]; 
   
@@ -38,8 +38,9 @@ exports = Class(function () {
     this.state = new State();
     this.goalState = new State();
   
-    this.state.add(level.state);
-    this.goalState.add(level.goalState);
+    this.add(level.state);
+    //Goal states need to be treated specially
+   // this.add(level.goalState);
   }
 
   this.complete = function () {
