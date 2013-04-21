@@ -1,6 +1,4 @@
-Levels = {};
-
-var intro0 = {
+exports = {
   name: "intro0",
   state:
   {
@@ -31,5 +29,4 @@ var intro0 = {
     {
     }
   }
-}
-Levels[intro0.name] = intro0;
+};
