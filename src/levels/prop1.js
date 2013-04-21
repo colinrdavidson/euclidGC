@@ -1,4 +1,4 @@
-var prop1 = {
+exports = {
   name: "prop1",
   state:
   {
@@ -33,5 +33,4 @@ var prop1 = {
     {
     }
   }
-}
-Levels[prop1.name] = prop1;
+};

@@ -1,5 +1,5 @@
 
-var intro1 = {
+exports = {
   name: "intro1",
   state:
   {
@@ -30,5 +30,4 @@ var intro1 = {
       0: { foc: 0, loc: 1 }
     }
   }
-}
-Levels[intro1.name] = intro1;
+};

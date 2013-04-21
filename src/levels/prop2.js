@@ -1,7 +1,7 @@
 //Proposition 2: To place at a given point a straight line equal to a given straight
 //line.
 
-var prop2 = {
+exports = {
   name: "prop2",
   state:
   {
@@ -32,5 +32,4 @@ var prop2 = {
     {
     }
   }
-}
-Levels[prop2.name] = prop2;
+};
