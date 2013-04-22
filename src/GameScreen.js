@@ -174,19 +174,25 @@ exports = Class(View, function(supr) {
     //TODO there should and is a better way of doing this, try and get jquery
     //or underscore js rockin
 
-    for(var i = 0; i <= this._selectedShapes.length; i++) {
-      if (this._selectedShapes[i] == shape) {
-        return;
+    if (this._selectedShapes.length == 0) {
+       this._selectedShapes.push(shape);
+    }
+    else if (this._selectedShapes.length == 1) {
+      if (this._selectedShapes[0] != shape) {
+        this._selectedShapes.push(shape);
+      }
+    }
+    else {
+      if (this._selectedShapes[1] != shape) {
+        var unselected = this._selectedShapes.shift();
+    
+        var unselectedView = game.hash.byModel[unselected];
+        unselectedView.unselect();
+
+        this._selectedShapes.push(shape);
       }
     }
 
-    if (this._selectedShapes.length >= 2) {
-     var unselected = this._selectedShapes.shift();
-    
-      var unselectedView = game.hash.byModel[unselected];
-      unselectedView.unselect();
-    }
-
-    this._selectedShapes.push(shape);
+    console.log("Point 1: " + this._selectedShapes[0] + " Point 2: " + this._selectedShapes[1]);
   };
 });
