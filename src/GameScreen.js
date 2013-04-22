@@ -172,20 +172,23 @@ exports = Class(View, function(supr) {
 
   this.selectShape = function (shape) {
     if (this._selectedShapes.length == 0) {
-       this._selectedShapes.push(shape);
+      this._selectedShapes.push(shape);
+			game.hash.byModel[shape].select();
     }
     else if (this._selectedShapes.length == 1) {
       if (this._selectedShapes[0] != shape) {
         this._selectedShapes.push(shape);
+				game.hash.byModel[shape].select();
       }
     }
     else {
       if (this._selectedShapes[1] != shape) {
         var unselected = this._selectedShapes.shift();
-    
         var unselectedView = game.hash.byModel[unselected];
         unselectedView.unselect();
+
         this._selectedShapes.push(shape);
+				game.hash.byModel[shape].select();
       }
     }
 

@@ -34,8 +34,7 @@ exports = Class(ImageView, function (supr) {
     supr(this, "init", [opts]);
 
     this.on("InputSelect", bind(this, function (event) {
-      this.select();
-      this.emit('PointView:clicK', this);
+      this.emit('PointView:click', this);
       event.cancel();
     }));
   };
