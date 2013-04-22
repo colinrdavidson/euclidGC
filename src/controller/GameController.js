@@ -39,8 +39,7 @@ exports = Class(function () {
     this.goalState = new State();
   
     this.add(level.state);
-    //Goal states need to be treated specially
-   // this.add(level.goalState);
+    this.addGoalState(level.goalState);
   }
 
   this.complete = function () {
@@ -108,6 +107,7 @@ exports = Class(function () {
     if (points){
       for (var p in points){
         var point = new Point(0, points[p].x, points[p].y);
+        points[p] = point;
         this.addPoint(point); 
       }
     }
@@ -133,6 +133,10 @@ exports = Class(function () {
       }
     }
   }
+
+  this.addGoalState = function (levelState) {
+    this.goalState.add(levelState);
+  };
 
   this.add = function (object) {
     this._add(object);

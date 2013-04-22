@@ -134,6 +134,7 @@ exports = Class(function () {
     if (points){
       for (var p in points){
         var point = new Point(0, points[p].x, points[p].y);
+        points[p] = point;
         this.addPoint(point); 
       }
     }
