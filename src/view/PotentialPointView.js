@@ -22,7 +22,7 @@ exports = Class(PointView, function (supr) {
     }));
 
     this.on("InputSelect", bind(this, function (event) {
-      this.emit('PotentialPointView:select', this);
+      this.emit('PotentialPointView:click', this);
       event.cancel();
     }));
   };
