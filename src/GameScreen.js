@@ -171,9 +171,6 @@ exports = Class(View, function(supr) {
   };
 
   this.selectShape = function (shape) {
-    //TODO there should and is a better way of doing this, try and get jquery
-    //or underscore js rockin
-
     if (this._selectedShapes.length == 0) {
        this._selectedShapes.push(shape);
     }
@@ -188,7 +185,6 @@ exports = Class(View, function(supr) {
     
         var unselectedView = game.hash.byModel[unselected];
         unselectedView.unselect();
-
         this._selectedShapes.push(shape);
       }
     }
