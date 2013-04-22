@@ -119,7 +119,7 @@ exports = Class(View, function(supr) {
               point: object,
               superview: this
             });
-            potentialPointView.on('PotentialPointView:select', bind(this, this.potentialPointSelect));
+            potentialPointView.on('PotentialPointView:click', bind(this, this.potentialPointSelect));
             game.hash.add({model: object, view: potentialPointView});
           }
           else {
@@ -127,7 +127,7 @@ exports = Class(View, function(supr) {
               point: object,
               superview: this
             });
-            pointView.on('PointView:select', bind(this, this.pointSelect));
+            pointView.on('PointView:click', bind(this, this.pointSelect));
             game.hash.add({model: object, view: pointView});
           }
           break;
@@ -137,7 +137,7 @@ exports = Class(View, function(supr) {
             line: object,
             superview: this
           });
-          lineView.on('LineView:select', bind(this, this.lineSelect));
+          lineView.on('LineView:click', bind(this, this.lineSelect));
           game.hash.add({model: object, view: lineView});
           break;
 
@@ -146,7 +146,7 @@ exports = Class(View, function(supr) {
             circle: object,
             superview: this
           });
-          circleView.on('CircleView:select', bind(this, this.circleSelect));
+          circleView.on('CircleView:click', bind(this, this.circleSelect));
           game.hash.add({model: object, view: circleView});
           break;
       }
