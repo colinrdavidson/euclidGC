@@ -38,6 +38,7 @@ exports = Class(function () {
     return false;
   }
 
+//Handy Getters
   this.pointsPotentialPoints = function () {
     return this.points.concat(this.potentialPoints);
   }
@@ -63,7 +64,7 @@ exports = Class(function () {
     }
     else {
       console.log("Failed to add: ", point.toString());
-    }
+		}	
   }
   
   this.addLine = function (line) {
@@ -177,6 +178,7 @@ exports = Class(function () {
     else if (object.points || object.lines || object.circles){
       this.addLevelState(object);
     }
+		return this.recentlyAdded;
   }
   
 //Remove Methods

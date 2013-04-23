@@ -17,7 +17,8 @@ exports = Class(function () {
     this.history = [];
     this.hash = new Hash();
   }
-  
+
+//Level Handling  
   this.loadLevel = function (levelName) {
     this.levelName = levelName;
     //find levelName in levelArray
@@ -50,7 +51,8 @@ exports = Class(function () {
       return false;
     }
   }
-  
+
+//Handy Getters  
   this.potentialPoints = function () {
     return this.state.potentialPoints();
   }
@@ -72,158 +74,15 @@ exports = Class(function () {
   }
    
 //Add Methods
-  this.addPoint = function (point) {
-    this.state.addPoint(point);
-  }
-  
-  this.addLine = function (line) { 
-    var potentialPoints = this.state.addLine(line);
-    game.addPotentialPoint(potentialPoints);
-  }
-  
-  this.addCircle = function (circle) {
-    var potentialPoints = this.state.addCircle(circle);
-    game.addPotentialPoint(potentialPoints);
-  }
-
-  this.addPotentialPoint = function (point) {
-    if (Object.prototype.toString.call(point) === '[object Array]'){
-      for (var i = 0; i < point.length; i++){
-        this.addPotentialPoint(point[i]);
-      }
-    }
-    else if(point.type == "Point") {
-      this.state.addPotentialPoint(point);
-    }
-  }
-
-
-  this.addLevelState = function (levelState) {
-    var points = levelState.points;
-    var lines = levelState.lines;
-    var circles = levelState.circles;
-    var potentialPoints = levelState.potentialPoints;
-  
-    if (points){
-      for (var p in points){
-        var point = new Point(0, points[p].x, points[p].y);
-        points[p] = point;
-        this.addPoint(point); 
-      }
-    }
-  
-    if (lines){
-      for (var l in lines){
-        var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
-        this.addLine(line);
-      }
-    }
-  
-    if (circles){
-      for (var c in circles){
-        var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
-        this.addCircle(circle);
-      } 
-    }
-
-    if (potentialPoints){
-      for (var p in potentialPoints){
-        var point = new Point(0, potentialPoints[p].x, potentialPoints[p].y);
-        this.addPotentialPoint(point); 
-      }
-    }
-  }
-
   this.addGoalState = function (levelState) {
     this.goalState.add(levelState);
     this.drawer.drawGoals(this.goalState);
   };
 
   this.add = function (object) {
-    this._add(object);
-    this.history.push(this.state.recentlyAdded);
-    this.draw(this.state.recentlyAdded);
-    this.state.recentlyAdded = [];
+    var toDraw = this.state.add(object);
+    this.draw(toDraw);
   }
-
-  this._add = function (object) {
-    if (object.type === "Point"){
-      this.addPoint(object);
-    }
-    else if (object.type === "Line"){
-      this.addLine(object);
-    }
-    else if (object.type === "Circle"){
-      this.addCircle(object);
-    }
-    else if (Object.prototype.toString.call(object) === '[object Array]'){
-      for (var i = 0; i < object.length; i++){
-        this._add(object[i]);
-      }
-    }
-    else if (object.type === "State"){
-      this._add(object.all());
-    }
-    else if (object.points || object.lines || object.circles){
-      this.addLevelState(object);
-    }
-  
-    //if (game.complete()){
-    //  alert("You win, you always do!");
-    //}
-  }
-
-//Add/Remove Methods
-  this.promotePotentialPoint = function (point) {
-    this.removePotentialPoint(point);
-    point.potential = false;
-    this.add(point);
-  }
-
-//Remove Methods
-  this.removePoint = function (point) {
-    this.state.removePoint(point);
-  }
-
-  this.removeLine = function (line) {
-    this.state.removeLine(line);
-  }
-
-  this.removeCircle = function (circle) {
-    this.state.removeCircle(circle);
-  }
-
-  this.removePotentialPoint = function (point) {
-    this.state.removePotentialPoint(point);
-  }
-
-  this.removeLevelState = function (levelState) {
-    this.state.removeLevelState(levelState);
-  }
-
-  this.remove = function (object) {
-    if (object.type === "Point"){
-      this.removePoint(object);
-    }
-    else if (object.type === "Line"){
-      this.removeLine(object);
-    }
-    else if (object.type === "Circle"){
-      this.removeCircle(object);
-    }
-    else if (Object.prototype.toString.call(object) === '[object Array]'){
-      for (var i = 0; i < object.length; i++){
-        this.remove(object[i]);
-      }
-    }
-    else if (object.type === "State"){
-      this.remove(object.all());
-    }
-    else if (object.points || object.lines || object.circles){
-      this.removeLevelState(object);
-    }
-  }
-
 
 //Drawing methods 
   this.draw = function (object, colour) {
