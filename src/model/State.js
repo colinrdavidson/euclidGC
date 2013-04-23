@@ -73,7 +73,7 @@ exports = Class(function () {
         var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
   
         for (var j = 0; j < potentialPoints.length; j++) {
-          if (!potentialPoints[j].isInArray(toReturn)) {
+          if (!potentialPoints[j].isInArray(this.points) && !potentialPoints[j].isInArray(toReturn)) {
             toReturn.push(potentialPoints[j]);
           }
         }
@@ -96,7 +96,7 @@ exports = Class(function () {
         var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
   
         for (var j = 0; j < potentialPoints.length; j++){
-          if (!potentialPoints[j].isInArray(toReturn)) {
+          if (!potentialPoints[j].isInArray(this.points) && !potentialPoints[j].isInArray(toReturn)) {
             toReturn.push(potentialPoints[j]);
           }
         }
