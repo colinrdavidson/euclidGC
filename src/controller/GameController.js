@@ -38,8 +38,8 @@ exports = Class(function () {
     this.state = new State();
     this.goalState = new State();
   
-    this.add(level.state);
     this.addGoalState(level.goalState);
+    this.add(level.state);
   }
 
   this.complete = function () {
@@ -136,6 +136,7 @@ exports = Class(function () {
 
   this.addGoalState = function (levelState) {
     this.goalState.add(levelState);
+    this.drawer.drawGoals(this.goalState);
   };
 
   this.add = function (object) {
@@ -231,15 +232,6 @@ exports = Class(function () {
     }
     else{
       this.drawer.draw(object, colour);
-    }
-  }
-  
-  this.drawGoals = function (colour) {
-    if (!colour){
-      colour = "#000000";
-    }
-    else{
-      this.drawer.draw(game.goalState, colour);
     }
   }
   

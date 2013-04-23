@@ -10,6 +10,9 @@ import src.view.PointView as PointView;
 import src.view.PotentialPointView as PotentialPointView;
 import src.view.LineView as LineView;
 import src.view.CircleView as CircleView;
+import src.view.GoalPointView as GoalPointView;
+import src.view.GoalLineView as GoalLineView;
+import src.view.GoalCircleView as GoalCircleView;
 import src.controller.GameController as GameController;
 import src.ModelViewHash as Hash;
 
@@ -148,6 +151,45 @@ exports = Class(View, function(supr) {
           });
           circleView.on('CircleView:click', bind(this, this.circleSelect));
           game.hash.add({model: object, view: circleView});
+          break;
+      }
+    }
+  };
+
+  this.drawGoals = function (object) {
+    if (Object.prototype.toString.call(object) === '[object Array]'){
+      for (var i = 0; i < object.length; i++){
+        this.drawGoals(object[i]);
+      }
+    }
+    else {
+      switch (object.type) {
+        case "State":
+          this.drawGoals(object.pointsLinesCircles());
+          break;
+           
+        case "Point":
+          var pointView = new GoalPointView({
+            point: object,
+            superview: this
+          });
+          //pointView.onGoals('GoalPointView:click', bind(this, this.pointSelect));
+          break;
+
+        case "Line":
+          var lineView = new GoalLineView({
+            line: object,
+            superview: this
+          });
+          //lineView.on('GoalLineView:click', bind(this, this.lineSelect));
+          break;
+
+        case "Circle":
+          var circleView = new GoalCircleView({
+            circle: object,
+            superview: this
+          });
+          //circleView.on('GoalCircleView:click', bind(this, this.circleSelect));
           break;
       }
     }
