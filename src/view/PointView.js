@@ -11,7 +11,8 @@ exports = Class(ImageView, function (supr) {
 
     this._point = point;
 
-    this._defaultImage = "resources/images/circle-black.png";
+    this._defaultImage = new Image({url: "resources/images/circle-black.png"});
+    this._selectedImage = new Image({url: "resources/images/circle-blue.png"});
 
     if (!image) {
       image = this._defaultImage;
@@ -40,12 +41,10 @@ exports = Class(ImageView, function (supr) {
   };
 
   this.select = function () {
-    var image = new Image({url: "resources/images/circle-blue.png"});
-    this.setImage(image);
+    this.setImage(this._selectedImage);
   };
 
   this.unselect = function () {
-    var image = new Image({url: this._defaultImage});
-    this.setImage(image);
+    this.setImage(this._defaultImage);
   };
 });
