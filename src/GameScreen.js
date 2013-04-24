@@ -86,13 +86,17 @@ exports = Class(View, function(supr) {
     //attach all of the handlers, i'd perfer to do this elsewhere (like in the
     //game controller) but at this point View ID's aren't working
     
-    lineButton.on("LineButton:click", function () { game.createLine(); });
+    lineButton.on("LineButton:click", function () { 
+      game.currentFunction = game.createLine; 
+    });
 
     circleButton.on('InputSelect', function (event) {
       this.emit("CircleButton:click");
       event.cancel();
     });
 
-    circleButton.on("CircleButton:click", function () { game.createCircle(); });
+    circleButton.on("CircleButton:click", function () {
+      game.currentFunction = game.createCircle;
+    });
   }
 });

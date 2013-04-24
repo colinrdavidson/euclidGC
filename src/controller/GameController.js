@@ -23,6 +23,8 @@ exports = Class(function () {
     this.history = [];
     this.hash = new Hash();
     this.selectedShapes = [];
+    this.defaultCurrentFunction = function () { console.log('default!'); };
+    this.currentFunction = this.defaultCurrentFunction;
   }
 
 //Level Handling  
@@ -203,16 +205,20 @@ this.removePotentialPoint = function (point) {
     }
   }
 
-//Event Handlers
+  //Create methods
   this.createLine = function () {
     if (this.selectedShapes.length == 2) {
       console.log("Current1: " + this.selectedShapes[0]);
       console.log("Current2: " + this.selectedShapes[1]);
 
-      var newLine = new Line(this.selectedShapes[0], this.selectedShapes[1]);
+      var newLine = new Line(1, this.selectedShapes[0], this.selectedShapes[1]);
 
       this.add(newLine);
+
+      return true;
     }
+
+    return false;
   }
 
   this.createCircle = function () {
@@ -220,15 +226,29 @@ this.removePotentialPoint = function (point) {
       console.log("Current1: " + this.selectedShapes[0]);
       console.log("Current2: " + this.selectedShapes[1]);
 
-      var newCircle = new Circle(this.selectedShapes[0], this.selectedShapes[1]);
+      var newCircle = new Circle(1, this.selectedShapes[0], this.selectedShapes[1]);
 
       this.add(newCircle);
+
+      return true;
     }
+
+    return false;
   }
+  
+  this.tryCurrentFunction = function () {
+    var success = this.currentFunction();
+    if (success) {
+      this.selectedShapes = [];
+      this.currentFunction = this.defaultCurrentFunction;
+    }
+  };
+  //Select
   this.pointSelect = function (pointView) {
     var point = pointView._point;
-
-    this.selectShape(point);
+    if (this.currentFunction != this.defaultCurrentFunction) {
+      this.selectShape(point);
+    }
   };
 
   this.potentialPointSelect = function (potentialPointView) {
@@ -265,5 +285,6 @@ this.removePotentialPoint = function (point) {
     }
 
     console.log("Point 1: " + this.selectedShapes[0] + " Point 2: " + this.selectedShapes[1]);
+    this.tryCurrentFunction();
   };
 });
