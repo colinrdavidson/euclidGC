@@ -3,7 +3,7 @@ import src.util as util;
 
 exports = Class(function () {
 
-  this.init = function (x, y, potential) {
+  this.init = function (x, y) {
     this.x = Math.round(x*1000000)/1000000;
     this.y = Math.round(y*1000000)/1000000;;
     this.type = "Point";
@@ -28,12 +28,14 @@ exports = Class(function () {
   
   this.isInArray = function (array){
     //assume this array is full of points
-    for(var i = 0; i < array.length; i++){
-      if (this.isSame(array[i])){
-        return true;
-      }
+		if (array){
+    	for(var i = 0; i < array.length; i++){
+      	if (this.isSame(array[i])){
+        	return true;
+				}
+			}
     }
-    return false;
+    	return false;
   }
   
   this.distanceToPoint = function (point) {
