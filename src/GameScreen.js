@@ -87,7 +87,7 @@ exports = Class(View, function(supr) {
     //game controller) but at this point View ID's aren't working
     
     lineButton.on("LineButton:click", function () { 
-      game.currentFunction = game.createLine; 
+      game.setCurrentFunction(game.createLine);
     });
 
     circleButton.on('InputSelect', function (event) {
@@ -96,7 +96,7 @@ exports = Class(View, function(supr) {
     });
 
     circleButton.on("CircleButton:click", function () {
-      game.currentFunction = game.createCircle;
+      game.setCurrentFunction(game.createCircle);
     });
   }
 });

@@ -235,6 +235,16 @@ this.removePotentialPoint = function (point) {
 
     return false;
   }
+
+  this.setCurrentFunction = function (func) {
+    //clear selected points
+    for (var i = 0; i < this.selectedShapes.length; i++) {
+      this.hash.byModel[this.selectedShapes[i]].unselect();
+    }
+
+    this.selectedShapes = [];
+    this.currentFunction = func; 
+  };
   
   this.tryCurrentFunction = function () {
     var success = this.currentFunction();
