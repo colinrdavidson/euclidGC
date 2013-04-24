@@ -113,6 +113,18 @@ exports = Class(function () {
     this.draw(toDraw);
   }
 
+//Add/Remove Methods
+this.promotePotentialPoint = function (point) {
+	this.removePotentialPoint(point);
+	point.potential = false;
+	this.add(point);
+}
+
+//Remove Methods
+this.removePotentialPoint = function (point) {
+	this.state.removePotentialPoint(point);
+}
+
 //Drawing methods 
   this.draw = function (object) {
     if (Object.prototype.toString.call(object) === '[object Array]'){
