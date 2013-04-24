@@ -8,8 +8,6 @@ exports = Class(function () {
     this.x = Math.round(x*1000000)/1000000;
     this.y = Math.round(y*1000000)/1000000;;
     this.type = "Point";
-    
-    this.potential = potential ? true : false;
   }
  
   this.copy = function (layer) {
