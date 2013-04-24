@@ -25,28 +25,6 @@ exports = Class(function () {
     this.selectedShapes = [];
   }
 
-  this.createLine = function () {
-    if (this.selectedShapes.length == 2) {
-      console.log("Current1: " + this.selectedShapes[0]);
-      console.log("Current2: " + this.selectedShapes[1]);
-
-      var newLine = new Line(this.selectedShapes[0], this.selectedShapes[1]);
-
-      this.add(newLine);
-    }
-  }
-
-  this.createCircle = function () {
-    if (this.selectedShapes.length == 2) {
-      console.log("Current1: " + this.selectedShapes[0]);
-      console.log("Current2: " + this.selectedShapes[1]);
-
-      var newCircle = new Circle(this.selectedShapes[0], this.selectedShapes[1]);
-
-      this.add(newCircle);
-    }
-  }
-
 //Level Handling  
   this.loadLevel = function (levelName) {
     this.levelName = levelName;
@@ -132,51 +110,62 @@ this.removePotentialPoint = function (point) {
         this.draw(object[i]);
       }
     }
-    else {
-      switch (object.type) {
-        case "State":
-          this.draw(object.pointsLinesCircles());
-          break;
-           
-        case "Point":
-          if (object.potential) {
-            var potentialPointView = new PotentialPointView({
-              point: object,
-              superview: this.gameScreen
-            });
-            potentialPointView.on('PotentialPointView:click', bind(this, this.potentialPointSelect));
-            game.hash.add({model: object, view: potentialPointView});
-          }
-          else {
+
+		else if (object.points || object.lines || object.circles || object.potentialPoints){
+			for (var i = 0; i < object.points.length; i++){
+				this.drawPoint(object.points[i]);
+			}
+			for (var i = 0; i < object.potentialPoints.length; i++){
+				this.drawPotentialPoint(object.potentialPoints[i]);
+			}
+			for (var i = 0; i < object.lines.length; i++){
+				this.drawLine(object.lines[i]);
+			}
+			for (var i = 0; i < object.circles.length; i++){
+				this.drawCircle(object.circles[i]);
+			}
+    }
+
+		else {
+			console.log("Nothing to draw here, or argument isn't an array or obj{pts, ppts, lns, circs}");
+		}
+  }
+
+	this.drawPoint = function (object) {
             var pointView = new PointView({
               point: object,
               superview: this.gameScreen
             });
             pointView.on('PointView:click', bind(this, this.pointSelect));
             game.hash.add({model: object, view: pointView});
-          }
-          break;
+	}
+	
+	this.drawPotentialPoint = function (object) {
+            var potentialPointView = new PotentialPointView({
+              point: object,
+              superview: this.gameScreen
+            });
+            potentialPointView.on('PotentialPointView:click', bind(this, this.potentialPointSelect));
+            game.hash.add({model: object, view: potentialPointView});
+	}
 
-        case "Line":
+	this.drawLine = function (object) {
           var lineView = new LineView({
             line: object,
             superview: this.gameScreen
           });
           lineView.on('LineView:click', bind(this, this.lineSelect));
           game.hash.add({model: object, view: lineView});
-          break;
+	}
 
-        case "Circle":
+	this.drawCircle = function (object) {
           var circleView = new CircleView({
             circle: object,
             superview: this.gameScreen
           });
           circleView.on('CircleView:click', bind(this, this.circleSelect));
           game.hash.add({model: object, view: circleView});
-          break;
-      }
-    }
-  }
+	}
 
   this.drawGoals = function (object) {
     if (Object.prototype.toString.call(object) === '[object Array]'){
@@ -211,6 +200,29 @@ this.removePotentialPoint = function (point) {
           });
           break;
       }
+    }
+  }
+
+//Event Handlers
+  this.createLine = function () {
+    if (this.selectedShapes.length == 2) {
+      console.log("Current1: " + this.selectedShapes[0]);
+      console.log("Current2: " + this.selectedShapes[1]);
+
+      var newLine = new Line(this.selectedShapes[0], this.selectedShapes[1]);
+
+      this.add(newLine);
+    }
+  }
+
+  this.createCircle = function () {
+    if (this.selectedShapes.length == 2) {
+      console.log("Current1: " + this.selectedShapes[0]);
+      console.log("Current2: " + this.selectedShapes[1]);
+
+      var newCircle = new Circle(this.selectedShapes[0], this.selectedShapes[1]);
+
+      this.add(newCircle);
     }
   }
   this.pointSelect = function (pointView) {
