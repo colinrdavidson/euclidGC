@@ -3,20 +3,14 @@ import src.util as util;
 
 exports = Class(function () {
 
-  this.init = function (layer, x, y, potential) {
-    this.layer = layer;
+  this.init = function (x, y, potential) {
     this.x = Math.round(x*1000000)/1000000;
     this.y = Math.round(y*1000000)/1000000;;
     this.type = "Point";
   }
  
-  this.copy = function (layer) {
-    if (!layer){
-      return new Point(this.layer, this.x, this.y);
-    }
-    else{
-      return new Point(layer, this.x, this.y);
-    }
+  this.copy = function () {
+    return new Point(this.x, this.y);
   }
   
   this.isSame = function (pt) {
@@ -106,7 +100,7 @@ exports = Class(function () {
     x4 = x1 + dx4;
     y4 = y1 + dy4;
     
-    var dummyPoint = new Point(this.layer, x4, y4);
+    var dummyPoint = new Point(x4, y4);
   
     //point in segment
     if (line.containsPoint(dummyPoint)){

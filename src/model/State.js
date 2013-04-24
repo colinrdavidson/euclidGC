@@ -134,7 +134,7 @@ exports = Class(function () {
   
     if (points){
       for (var p in points){
-        var point = new Point(0, points[p].x, points[p].y);
+        var point = new Point(points[p].x, points[p].y);
         points[p] = point;
         this.addPoint(point); 
       }
@@ -143,7 +143,7 @@ exports = Class(function () {
   
     if (lines){
       for (var l in lines){
-        var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
+        var line = new Line(points[lines[l].pt1], points[lines[l].pt2]);
         this.addLine(line);
       }
     }
@@ -151,7 +151,7 @@ exports = Class(function () {
   
     if (circles){
       for (var c in circles){
-        var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
+        var circle = new Circle(points[circles[c].foc], points[circles[c].loc]);
         this.addCircle(circle);
       } 
     }
@@ -245,21 +245,21 @@ exports = Class(function () {
   
     if (points){
       for (var p in points){
-        var point = new Point(0, points[p].x, points[p].y);
+        var point = new Point(points[p].x, points[p].y);
         this.removePoint(point); 
       }
     }
   
     if (lines){
       for (var l in lines){
-        var line = new Line(0, points[lines[l].pt1], points[lines[l].pt2]);
+        var line = new Line(points[lines[l].pt1], points[lines[l].pt2]);
         this.removeLine(line);
       }
     }
   
     if (circles){
       for (var c in circles){
-        var circle = new Circle(0, points[circles[c].foc], points[circles[c].loc]);
+        var circle = new Circle(points[circles[c].foc], points[circles[c].loc]);
         this.removeCircle(circle);
       } 
     }

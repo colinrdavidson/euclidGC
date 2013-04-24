@@ -30,7 +30,7 @@ exports = Class(function () {
       console.log("Current1: " + this.selectedShapes[0]);
       console.log("Current2: " + this.selectedShapes[1]);
 
-      var newLine = new Line(1, this.selectedShapes[0], this.selectedShapes[1]);
+      var newLine = new Line(this.selectedShapes[0], this.selectedShapes[1]);
 
       this.add(newLine);
     }
@@ -41,7 +41,7 @@ exports = Class(function () {
       console.log("Current1: " + this.selectedShapes[0]);
       console.log("Current2: " + this.selectedShapes[1]);
 
-      var newCircle = new Circle(1, this.selectedShapes[0], this.selectedShapes[1]);
+      var newCircle = new Circle(this.selectedShapes[0], this.selectedShapes[1]);
 
       this.add(newCircle);
     }

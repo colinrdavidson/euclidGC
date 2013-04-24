@@ -5,11 +5,10 @@ import src.util as util;
 
 exports = Class(function () {
 
-  this.init = function (layer, foc, loc){
+  this.init = function (foc, loc){
     //foc is for focus ie centre
     //loc is for loci ie point on circle
   
-    this.layer = layer;
     this.foc = foc;
     this.loc = loc;
     this.radius = foc.distanceToPoint(loc);
@@ -25,8 +24,8 @@ exports = Class(function () {
     }
   }
   
-  this.copy = function (layer) {
-    return new Circle(layer, this.foc, this.loc);
+  this.copy = function () {
+    return new Circle(this.foc, this.loc);
   }
   
   this.intersectsWith = function (shape) {
@@ -91,8 +90,8 @@ exports = Class(function () {
         var yi = y2 + ry;
         var yi_prime = y2 - ry;
   
-        var point1 = new Point(this.layer, xi, yi);
-        var point2 = new Point(this.layer, xi_prime, yi_prime);
+        var point1 = new Point(xi, yi);
+        var point2 = new Point(xi_prime, yi_prime);
   
         if (point1.isSame(point2)){
           pointsOfIntersection.push(point1);

@@ -4,8 +4,7 @@ import src.util as util;
 
 exports = Class(function () {
 
-  this.init = function (layer, pt1, pt2) {
-    this.layer = layer;
+  this.init = function (pt1, pt2) {
     this.pt1 = pt1;
     this.pt2 = pt2;
     this.type = "Line";
@@ -27,8 +26,8 @@ exports = Class(function () {
     }
   }
   
-  this.copy = function (layer) {
-    return new Line(layer, this.pt1, this.pt2);
+  this.copy = function () {
+    return new Line(this.pt1, this.pt2);
   }
   
   this.intersectsWith = function(shape){
@@ -84,8 +83,8 @@ exports = Class(function () {
         var newX2 = x1 + dP2x*(offset);
         var newY2 = y1 + dP2y*(offset);
   
-        var point1 = new Point(this.layer, newX1, newY1);
-        var point2 = new Point(this.layer, newX2, newY2);
+        var point1 = new Point(newX1, newY1);
+        var point2 = new Point(newX2, newY2);
   
         //point1 in segment
         if (this.containsPoint(point1)){
@@ -99,7 +98,7 @@ exports = Class(function () {
       }
       else{
         if (b == r){ //intersect at 1 point
-          var point = new Point(this.layer, x3, y3); //projection is the only intersection
+          var point = new Point(x3, y3); //projection is the only intersection
   
           //point in segment
           if (this.containsPoint(point)){
@@ -114,8 +113,8 @@ exports = Class(function () {
           var newX2 = x3 + dP3x*(offset);
           var newY2 = y3 + dP3y*(offset);
   
-          var point1 = new Point(this.layer, newX1, newY1);
-          var point2 = new Point(this.layer, newX2, newY2);
+          var point1 = new Point(newX1, newY1);
+          var point2 = new Point(newX2, newY2);
   
           //point1 in segment
           if (this.containsPoint(point1)){
@@ -147,7 +146,7 @@ exports = Class(function () {
         var newX = ((x1*y2 - y1*x2)*(x3-x4) - (x1-x2)*(x3*y4 - y3*x4)) / denominator; 
         var newY = ((x1*y2 - y1*x2)*(y3-y4) - (y1-y2)*(x3*y4 - y3*x4)) / denominator; 
   
-        var point = new Point(this.layer, newX, newY);
+        var point = new Point(newX, newY);
   
         //points in segment
         if (this.containsPoint(point) && shape.containsPoint(point)){
@@ -238,8 +237,8 @@ exports = Class(function () {
       }
     }
     
-    new_point1 = new Point(this.layer, x1 + c*dx, y1 + c*dy);
-    new_point2 = new Point(this.layer, x1 + d*dx, y1 + d*dy);
+    new_point1 = new Point(x1 + c*dx, y1 + c*dy);
+    new_point2 = new Point(x1 + d*dx, y1 + d*dy);
   
   //  if (this.pt1.distanceTo(new_point1) > this.pt2.distanceTo(new_point1)){ //swap new points
   //    var temp = new_point2;
@@ -247,8 +246,8 @@ exports = Class(function () {
   //    new_point1 = temp;
   //  }
   //  
-  //  var new_line1 = new Line(layer, new_point1, this.pt1);
-  //  var new_line2 = new Line(layer, this.pt2, new_point2);
+  //  var new_line1 = new Line(new_point1, this.pt1);
+  //  var new_line2 = new Line(this.pt2, new_point2);
   //
   //
   //  console.log(new_line1.toString());
