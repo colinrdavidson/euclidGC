@@ -25,6 +25,28 @@ exports = Class(function () {
     this.selectedShapes = [];
   }
 
+  this.createLine = function () {
+    if (this.selectedShapes.length == 2) {
+      console.log("Current1: " + this.selectedShapes[0]);
+      console.log("Current2: " + this.selectedShapes[1]);
+
+      var newLine = new Line(1, this.selectedShapes[0], this.selectedShapes[1]);
+
+      this.add(newLine);
+    }
+  }
+
+  this.createCircle = function () {
+    if (this.selectedShapes.length == 2) {
+      console.log("Current1: " + this.selectedShapes[0]);
+      console.log("Current2: " + this.selectedShapes[1]);
+
+      var newCircle = new Circle(1, this.selectedShapes[0], this.selectedShapes[1]);
+
+      this.add(newCircle);
+    }
+  }
+
 //Level Handling  
   this.loadLevel = function (levelName) {
     this.levelName = levelName;
@@ -199,22 +221,22 @@ exports = Class(function () {
   this.selectShape = function (shape) {
     if (this.selectedShapes.length == 0) {
       this.selectedShapes.push(shape);
-			game.hash.byModel[shape].select();
+      game.hash.byModel[shape].select();
     }
     else if (this.selectedShapes.length == 1) {
       if (this.selectedShapes[0] != shape) {
         this.selectedShapes.push(shape);
-				game.hash.byModel[shape].select();
+        game.hash.byModel[shape].select();
       }
     }
     else {
       if (this.selectedShapes[1] != shape) {
-        var unselected = this._selectedShapes.shift();
+        var unselected = this.selectedShapes.shift();
         var unselectedView = game.hash.byModel[unselected];
         unselectedView.unselect();
 
         this.selectedShapes.push(shape);
-				game.hash.byModel[shape].select();
+        game.hash.byModel[shape].select();
       }
     }
 

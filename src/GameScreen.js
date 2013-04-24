@@ -22,6 +22,7 @@ exports = Class(View, function(supr) {
 
     var lineButton = new ButtonView({
       superview: this,
+      id: "LineButton",
       width: device.width / 3,
       height: 60,
       x: 0,
@@ -50,6 +51,7 @@ exports = Class(View, function(supr) {
 
     var circleButton = new ButtonView({
       superview: this,
+      id: "CircleButton",
       width: device.width / 3,
       height: 60,
       x: device.width / 3,
@@ -77,25 +79,20 @@ exports = Class(View, function(supr) {
     });
 
     //this function should be defined elsewhere but this'll do for now
-    lineButton.on('InputSelect', bind(this, function () {
-      if (this._selectedShapes.length === 2) {
-        console.log("Current1: " + this._selectedShapes[0]);
-        console.log("Current2: " + this._selectedShapes[1]);
+    lineButton.on('InputSelect', function (event) {
+      this.emit("LineButton:click");
+      event.cancel();
+    });
+    //attach all of the handlers, i'd perfer to do this elsewhere (like in the
+    //game controller) but at this point View ID's aren't working
+    
+    lineButton.on("LineButton:click", function () { game.createLine(); });
 
-        var newLine = new Line(1, this._selectedShapes[0], this._selectedShapes[1]);
-        
-        game.add(newLine);
-      }
-    }));
-    circleButton.on('InputSelect', bind(this, function () {
-      if (this._selectedShapes.length === 2) {
-        console.log("Current1: " + this._selectedShapes[0]);
-        console.log("Current2: " + this._selectedShapes[1]);
+    circleButton.on('InputSelect', function (event) {
+      this.emit("CircleButton:click");
+      event.cancel();
+    });
 
-        var newCircle  = new Circle(1, this._selectedShapes[0], this._selectedShapes[1]);
-        
-        game.add(newCircle);
-      }
-    }));
-  };
+    circleButton.on("CircleButton:click", function () { game.createCircle(); });
+  }
 });
