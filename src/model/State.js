@@ -13,7 +13,11 @@ exports = Class(function () {
     this.circles = obj.circles ? obj.circles : [];
     this.potentialPoints = obj.potentialPoints ? obj.potentialPoints : [];
     this.type = "State";
-    this.recentlyAdded = [];
+    this.recentlyAdded = {points : [],
+													potentialPoints : [],
+													lines : [],
+													circles : []
+												 };
   }
 
   this.isContainedIn = function (state) {
@@ -59,7 +63,7 @@ exports = Class(function () {
   this.addPoint = function (point) {
     if (!point.isInArray(this.points)){
       this.points.push(point);
-      this.recentlyAdded.push(point);
+      this.recentlyAdded.points.push(point);
       console.log("Add: ", point.toString());
     }
     else {
@@ -68,63 +72,60 @@ exports = Class(function () {
   }
   
   this.addLine = function (line) {
-    var toReturn = [];
     if (!line.isInArray(this.lines)){
+
+			//Since the line is new, check for intersections
       for (var i = 0; i < this.linesCircles().length; i++){
         var potentialPoints = line.intersectsWith(this.linesCircles()[i]);
-  
+
+				//Check if intersections are new
         for (var j = 0; j < potentialPoints.length; j++) {
-          if (!potentialPoints[j].isInArray(this.points) && !potentialPoints[j].isInArray(toReturn)) {
-            toReturn.push(potentialPoints[j]);
-          }
+					this.addPotentialPoint(potentialPoints[j]);
         }
       }
-  
+ 			
+			//Add the line to the line array and recently added object
       this.lines.push(line);
-      this.recentlyAdded.push(line);
+      this.recentlyAdded.lines.push(line);
       console.log("Add: ", line.toString());
     }
     else {
       console.log("Failed to add: ", line.toString());
     }
-    return toReturn;
   }
   
   this.addCircle = function (circle) {
-    var toReturn = [];
     if (!circle.isInArray(this.circles)){
+
+			//Since the cirlce is new, check for intersections
       for (var i = 0; i < this.linesCircles().length; i++){
         var potentialPoints = circle.intersectsWith(this.linesCircles()[i]);
-  
+ 
+				//Check if intersections are new points 
         for (var j = 0; j < potentialPoints.length; j++){
-          if (!potentialPoints[j].isInArray(this.points) && !potentialPoints[j].isInArray(toReturn)) {
-            toReturn.push(potentialPoints[j]);
-          }
+					this.addPotentialPoint(potentialPoint[j]);
         }
       }
   
+			//Add the circle to the circle array and recently added object
       this.circles.push(circle);
-      this.recentlyAdded.push(circle);
+      this.recentlyAdded.circles.push(circle);
       console.log("Add :", circle.toString());
     } 
     else{
       console.log("Failed to add: ", circle.toString());
     }
-    return toReturn;
   }
   
   this.addPotentialPoint = function (point) {
-    if (point.type === "Point"){
-      if (!point.isInArray(this.potentialPoints)){
-        point.potential = true;
-        this.potentialPoints.push(point);
-        this.recentlyAdded.push(point);
-        console.log("Add: Potential: ", point.toString());
-      }
+    if (!point.isInArray(this.allPoints)){
+      this.potentialPoints.push(point);
+      this.recentlyAdded.potentialPoints.push(point);
+      console.log("Add: Potential: ", point.toString());
     }
-    else {
-      console.log("Failed to add: ", point.toString());
-    }
+  	else  {
+    	console.log("Already exists no need to add:: ", point.toString());
+   	}
   }
   
   this.addLevelState = function (levelState) {
@@ -157,7 +158,7 @@ exports = Class(function () {
     }
   }
   
-  this.add = function (object) {
+  this._add = function (object) {
     if (object.type === "Point"){
       this.addPoint(object);
     }
@@ -178,8 +179,12 @@ exports = Class(function () {
     else if (object.points || object.lines || object.circles){
       this.addLevelState(object);
     }
-		return this.recentlyAdded;
   }
+
+	this.add = function (object) {
+		this._add(object);
+		return this.recentlyAdded;
+	}	
   
 //Remove Methods
   this.removePoint = function (point) {
